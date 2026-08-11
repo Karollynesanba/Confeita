@@ -32,25 +32,26 @@
         </div>
       </header>
 
-      <main class="recipe-page" data-recipe="bolo-morango-chantilly">
+      <main class="recipe-page" data-recipe="brownie-chocolate">
         <section class="recipe-hero-frame">
-          <div class="recipe-hero-bg">
+          <div class="recipe-hero-bg" data-recipe-cover>
             <div class="hero-overlay"></div>
             <button class="hero-fab back" type="button" aria-label="Voltar">‹</button>
             <button class="hero-fab heart" type="button" aria-label="Favoritar">♡</button>
             <button class="hero-fab bookmark" type="button" aria-label="Salvar">⌁</button>
             <div class="hero-play">▶</div>
-            <div class="hero-badge">🍰 Bolos</div>
+            <div class="hero-badge" data-recipe-category>🍫 Sobremesas</div>
             <div class="hero-title-block">
-              <h1>Bolo de Morango com Chantilly</h1>
+              <h1 data-recipe-title>Brownie de Chocolate</h1>
             </div>
           </div>
 
           <div class="recipe-meta-card">
-            <span class="meta-pill">★ 4.8 <small>(234 avaliações)</small></span>
-            <span class="meta-pill">⏱ 1h 20min</span>
-            <span class="meta-pill">👩‍🍳 Médio</span>
-            <span class="meta-pill">🍽 8 porções</span>
+            <span class="meta-pill" data-recipe-rating>★ 4.8 <small>(234 avaliações)</small></span>
+            <span class="meta-pill" data-recipe-time>⏱ 45 min</span>
+            <span class="meta-pill" data-recipe-level>🟢 Básico</span>
+            <span class="meta-pill" data-recipe-yield>🍽 9 a 12 pedaços</span>
+            <span class="meta-pill" data-recipe-temperature>🔥 180 °C</span>
           </div>
 
           <div class="recipe-author-row">
@@ -64,6 +65,8 @@
             <a class="btn btn-secondary" href="./chat.html" style="padding-inline:18px;">Seguir</a>
           </div>
 
+          <p class="recipe-summary" data-recipe-summary>Um brownie intenso, úmido e com casquinha delicada para servir em qualquer ocasião.</p>
+
           <div class="recipe-timer-row">
             <div class="timer-label">Timer de preparo</div>
             <div class="timer-main">
@@ -73,6 +76,7 @@
                 <button class="btn btn-secondary" data-reset-timer type="button">Reset</button>
               </div>
             </div>
+            <div class="progress" aria-hidden="true"><span data-progress></span></div>
           </div>
 
           <div class="recipe-tabs">
@@ -82,31 +86,16 @@
           </div>
 
           <div class="tab-panel active" data-panel="ingredients">
-            <div class="checklist recipe-checklist">
-              <label class="check-item"><input type="checkbox" /> 300g de farinha de trigo</label>
-              <label class="check-item"><input type="checkbox" /> 200g de açúcar refinado</label>
-              <label class="check-item"><input type="checkbox" /> 150g de manteiga sem sal (ponto pomada)</label>
-              <label class="check-item"><input type="checkbox" /> 3 ovos grandes em temperatura ambiente</label>
-              <label class="check-item"><input type="checkbox" /> 200ml de leite integral</label>
-              <label class="check-item"><input type="checkbox" /> 1 colher de chá de extrato de baunilha</label>
-              <label class="check-item"><input type="checkbox" /> 1 colher de sopa de fermento em pó</label>
-              <label class="check-item"><input type="checkbox" /> 200g de morangos frescos fatiados</label>
-              <label class="check-item"><input type="checkbox" /> 300ml de creme de leite fresco gelado</label>
-              <label class="check-item"><input type="checkbox" /> 2 col. de sopa de açúcar de confeiteiro</label>
-            </div>
+            <div class="checklist recipe-checklist" data-recipe-ingredients></div>
             <div class="ingredients-footer">
-              <span class="muted">0 de 10 selecionados</span>
-              <span class="progress-mini"><span></span></span>
+              <span class="muted" data-ingredient-count>0 de 0 selecionados</span>
+              <span class="progress-mini"><span data-ingredient-progress></span></span>
             </div>
           </div>
 
           <div class="tab-panel" data-panel="method">
-            <div class="step-list">
-              <div class="step">Pré-aqueça o forno e prepare as formas.</div>
-              <div class="step">Misture secos e cremosos até ficar homogêneo.</div>
-              <div class="step">Asse, espere esfriar e monte com morangos.</div>
-              <div class="step">Finalize com chantilly e açúcar de confeiteiro.</div>
-            </div>
+            <div class="step-list" data-recipe-steps></div>
+            <div class="recipe-notes" data-recipe-notes></div>
           </div>
 
           <div class="tab-panel" data-panel="comments">

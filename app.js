@@ -19,6 +19,387 @@ const formatTime = (seconds) => {
 const API_BASE = location.protocol === "file:" ? "http://localhost:3000" : "";
 const AUTH_TOKEN_KEY = "confeita_auth_token";
 
+const RECIPE_LEVEL_LABELS = {
+  basico: "🟢 Básico",
+  intermediario: "🟡 Médio",
+  avancado: "🔴 Difícil",
+};
+
+const RECIPES = [
+  {
+    id: "brownie-chocolate",
+    title: "Brownie de Chocolate",
+    category: "sobremesas",
+    categoryLabel: "Sobremesas",
+    categoryBadge: "🍫 Sobremesa",
+    level: "basico",
+    time: "45 min",
+    yield: "9 a 12 pedaços",
+    temperature: "180 °C",
+    rating: "4.8",
+    reviews: 128,
+    summary: "Intenso, úmido e com casquinha delicada para servir em qualquer ocasião.",
+    timer: "25:00",
+    cover: {
+      card: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(61,33,20,0.18)), url('./assets/bolo-chocolate-card.png') center center / cover no-repeat",
+      hero: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(61,33,20,0.18)), url('./assets/bolo-chocolate-card.png') center center / cover no-repeat",
+    },
+    ingredients: [
+      {
+        title: "Ingredientes",
+        items: [
+          "200 g de chocolate meio amargo",
+          "120 g de manteiga sem sal",
+          "150 g de açúcar",
+          "80 g de açúcar mascavo",
+          "3 ovos",
+          "90 g de farinha de trigo",
+          "30 g de cacau em pó 100%",
+          "1 pitada de sal",
+          "1 colher de chá de essência ou extrato de baunilha",
+        ],
+      },
+    ],
+    steps: [
+      "Preaqueça o forno a 180 °C e forre uma forma de 20 × 20 cm com papel-manteiga.",
+      "Derreta o chocolate com a manteiga em banho-maria ou no micro-ondas em intervalos curtos.",
+      "Misture ovos, açúcar refinado, açúcar mascavo e baunilha.",
+      "Acrescente o chocolate derretido e mexa até incorporar.",
+      "Peneire farinha, cacau e sal sobre a massa.",
+      "Misture apenas até não haver farinha visível.",
+      "Leve à forma, nivele e asse por 22 a 28 minutos.",
+      "Espere esfriar antes de cortar.",
+    ],
+    tip: "O palito deve sair com algumas migalhas úmidas. Se sair completamente seco, o brownie pode ter passado do ponto.",
+    mistake: "Assar demais esperando que o centro fique igual a um bolo.",
+    storage: "Até 3 dias em recipiente bem fechado em temperatura ambiente.",
+  },
+  {
+    id: "bolo-cenoura-brigadeiro",
+    title: "Bolo de Cenoura com Brigadeiro",
+    category: "bolos",
+    categoryLabel: "Bolos",
+    categoryBadge: "🥕 Bolo clássico",
+    level: "basico",
+    time: "1 hora",
+    yield: "10 a 12 porções",
+    temperature: "180 °C",
+    rating: "4.9",
+    reviews: 214,
+    summary: "Clássico, fofinho e com cobertura de brigadeiro brilhante para a vitrine ou para casa.",
+    timer: "30:00",
+    cover: {
+      card: "linear-gradient(135deg, rgba(255,216,168,0.95), rgba(248,192,126,0.96), rgba(255,246,232,0.88))",
+      hero: "linear-gradient(135deg, rgba(255,210,150,0.96), rgba(243,178,106,0.96), rgba(255,245,226,0.88))",
+    },
+    ingredients: [
+      {
+        title: "Ingredientes da massa",
+        items: [
+          "250 g de cenoura descascada e picada",
+          "3 ovos",
+          "180 ml de óleo",
+          "250 g de açúcar",
+          "240 g de farinha de trigo",
+          "15 g de fermento químico",
+        ],
+      },
+      {
+        title: "Ingredientes da cobertura",
+        items: [
+          "395 g de leite condensado",
+          "20 g de cacau em pó",
+          "15 g de manteiga",
+          "100 g de creme de leite",
+        ],
+      },
+    ],
+    steps: [
+      "Preaqueça o forno a 180 °C.",
+      "Bata cenoura, ovos, óleo e açúcar no liquidificador.",
+      "Transfira para uma tigela e acrescente a farinha aos poucos.",
+      "Misture manualmente e adicione o fermento por último.",
+      "Coloque em forma untada e enfarinhada.",
+      "Asse por 35 a 45 minutos.",
+      "Para a cobertura, cozinhe leite condensado, cacau e manteiga em fogo baixo.",
+      "Quando começar a engrossar, adicione o creme de leite e espalhe sobre o bolo.",
+    ],
+    tip: "Pese a cenoura. Excesso de cenoura pode deixar a massa pesada ou solada.",
+    mistake: "Bater a farinha no liquidificador junto com os demais ingredientes.",
+    storage: "Até 3 dias em recipiente fechado.",
+  },
+  {
+    id: "cheesecake-frutas-vermelhas",
+    title: "Cheesecake de Frutas Vermelhas",
+    category: "tortas",
+    categoryLabel: "Tortas",
+    categoryBadge: "🍓 Cremoso",
+    level: "intermediario",
+    time: "2h30 + refrigeração",
+    yield: "10 porções",
+    temperature: "160 °C",
+    rating: "4.9",
+    reviews: 176,
+    summary: "Uma base crocante, creme estável e calda viva de frutas vermelhas.",
+    timer: "40:00",
+    cover: {
+      card: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(61,33,20,0.18)), url('./assets/bolo-morango-card.png') center center / cover no-repeat",
+      hero: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(61,33,20,0.18)), url('./assets/bolo-morango-card.png') center center / cover no-repeat",
+    },
+    ingredients: [
+      { title: "Base", items: ["200 g de biscoito tipo maisena", "90 g de manteiga sem sal derretida"] },
+      {
+        title: "Creme",
+        items: [
+          "600 g de cream cheese",
+          "150 g de açúcar",
+          "200 g de creme de leite",
+          "3 ovos",
+          "1 colher de chá de baunilha",
+          "10 g de amido de milho",
+        ],
+      },
+      {
+        title: "Calda",
+        items: ["250 g de frutas vermelhas", "80 g de açúcar", "1 colher de sopa de suco de limão"],
+      },
+    ],
+    steps: [
+      "Triture os biscoitos e misture com a manteiga.",
+      "Pressione no fundo de uma forma de fundo removível e asse por 10 minutos a 180 °C.",
+      "Reduza o forno para 160 °C.",
+      "Misture cream cheese e açúcar.",
+      "Acrescente creme de leite, baunilha e amido.",
+      "Adicione os ovos um de cada vez.",
+      "Coloque sobre a base e asse por 50 a 65 minutos.",
+      "Deixe esfriar, refrigere por 6 horas e finalize com a calda fria.",
+    ],
+    tip: "Evite incorporar muito ar depois de adicionar os ovos.",
+    mistake: "Esperar que todo o cheesecake fique completamente firme dentro do forno.",
+    storage: "Até 4 dias refrigerado.",
+  },
+  {
+    id: "torta-limao-merengue",
+    title: "Torta de Limão com Merengue Suíço",
+    category: "tortas",
+    categoryLabel: "Tortas",
+    categoryBadge: "🍋 Equilíbrio",
+    level: "intermediario",
+    time: "2 horas",
+    yield: "8 a 10 porções",
+    temperature: "180 °C",
+    rating: "4.8",
+    reviews: 152,
+    summary: "Acidez equilibrada, creme suave e merengue leve para terminar com brilho.",
+    timer: "30:00",
+    cover: {
+      card: "linear-gradient(135deg, rgba(242,241,200,0.96), rgba(218,234,160,0.94), rgba(253,250,227,0.88))",
+      hero: "linear-gradient(135deg, rgba(242,241,200,0.96), rgba(218,234,160,0.94), rgba(253,250,227,0.88))",
+    },
+    ingredients: [
+      { title: "Base", items: ["200 g de biscoito maisena", "90 g de manteiga derretida"] },
+      {
+        title: "Creme de limão",
+        items: ["395 g de leite condensado", "200 g de creme de leite", "100 ml de suco de limão", "Raspas de 2 limões"],
+      },
+      { title: "Merengue suíço", items: ["3 claras, aproximadamente 100 g", "200 g de açúcar"] },
+    ],
+    steps: [
+      "Triture os biscoitos e misture com a manteiga.",
+      "Distribua no fundo e laterais da forma e asse por 10 minutos a 180 °C.",
+      "Deixe esfriar.",
+      "Misture leite condensado e creme de leite.",
+      "Adicione o suco de limão gradualmente e acrescente as raspas.",
+      "Para o merengue, aqueça claras e açúcar em banho-maria até dissolver.",
+      "Bata até obter um merengue firme e brilhante.",
+      "Cubra a torta e, se quiser, doure com maçarico.",
+    ],
+    tip: "Evite retirar a parte branca da casca do limão junto com as raspas.",
+    mistake: "Deixar a tigela do merengue tocar diretamente a água do banho-maria.",
+    storage: "Refrigerada por até 3 dias.",
+  },
+  {
+    id: "macaron-chocolate",
+    title: "Macaron de Chocolate",
+    category: "macarons",
+    categoryLabel: "Macarons",
+    categoryBadge: "🍫 Técnicas",
+    level: "avancado",
+    time: "Aproximadamente 3 horas",
+    yield: "18 a 22 macarons montados",
+    temperature: "140 a 150 °C",
+    rating: "4.9",
+    reviews: 96,
+    summary: "Casquinhas lisas, pés bem definidos e ganache de chocolate equilibrada.",
+    timer: "35:00",
+    cover: {
+      card: "linear-gradient(180deg, rgba(255,255,255,0.05), rgba(61,33,20,0.18)), url('./assets/hero-macaron.png') center center / cover no-repeat",
+      hero: "linear-gradient(180deg, rgba(255,255,255,0.05), rgba(61,33,20,0.18)), url('./assets/hero-macaron.png') center center / cover no-repeat",
+    },
+    ingredients: [
+      {
+        title: "Ingredientes dos macarons",
+        items: [
+          "100 g de farinha de amêndoas fina",
+          "100 g de açúcar de confeiteiro",
+          "100 g de claras",
+          "100 g de açúcar refinado",
+          "10 g de cacau em pó 100%",
+        ],
+      },
+      {
+        title: "Ganache",
+        items: ["150 g de chocolate meio amargo", "120 g de creme de leite"],
+      },
+    ],
+    steps: [
+      "Peneire farinha de amêndoas, açúcar de confeiteiro e cacau.",
+      "Bata as claras em velocidade média e adicione o açúcar refinado gradualmente.",
+      "Bata até obter merengue firme e brilhante.",
+      "Incorpore os ingredientes secos até chegar ao ponto de fita.",
+      "Coloque em saco de confeitar e forme círculos de 3 a 4 cm.",
+      "Bata suavemente a assadeira na bancada e deixe descansar até formar película.",
+      "Asse entre 140 e 150 °C por 12 a 16 minutos.",
+      "Esfrie completamente antes de rechear com a ganache.",
+      "Mature os macarons refrigerados por 24 horas para melhor textura.",
+    ],
+    tip: "A macaronage é um dos pontos mais importantes. A massa não deve ficar nem muito firme nem excessivamente líquida.",
+    mistake: "Usar a temperatura indicada sem considerar a temperatura real do próprio forno.",
+    storage: "Até 4 dias refrigerado em recipiente fechado.",
+  },
+  {
+    id: "entremet-chocolate-frutas-vermelhas",
+    title: "Entremet de Chocolate e Frutas Vermelhas",
+    category: "sobremesas",
+    categoryLabel: "Sobremesas",
+    categoryBadge: "🍓 Camadas",
+    level: "avancado",
+    time: "5 a 6 horas + congelamento",
+    yield: "8 a 10 porções",
+    temperature: "180 °C",
+    rating: "5.0",
+    reviews: 84,
+    summary: "Camadas elegantes, inserto vibrante e mousse sedosa para uma apresentação de vitrine.",
+    timer: "45:00",
+    cover: {
+      card: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(61,33,20,0.18)), url('./assets/torta-cookie-nutella-card.png') center center / cover no-repeat",
+      hero: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(61,33,20,0.18)), url('./assets/torta-cookie-nutella-card.png') center center / cover no-repeat",
+    },
+    ingredients: [
+      { title: "Base de chocolate", items: ["2 ovos", "70 g de açúcar", "60 g de farinha de trigo", "20 g de cacau em pó", "30 g de manteiga derretida"] },
+      {
+        title: "Inserto de frutas vermelhas",
+        items: ["250 g de frutas vermelhas", "60 g de açúcar", "5 g de gelatina em pó sem sabor", "25 g de água", "10 ml de suco de limão"],
+      },
+      {
+        title: "Mousse de chocolate",
+        items: ["250 g de chocolate meio amargo", "150 g de creme de leite", "300 g de creme de leite fresco bem gelado"],
+      },
+    ],
+    steps: [
+      "Hidrate a gelatina na água e cozinhe frutas, açúcar e limão por 8 minutos.",
+      "Acrescente a gelatina hidratada, coloque em forma menor e congele completamente.",
+      "Para a base, bata ovos e açúcar até ficarem claros e volumosos.",
+      "Peneire farinha e cacau, incorpore delicadamente e adicione a manteiga morna.",
+      "Espalhe em uma assadeira e asse por 10 a 15 minutos a 180 °C.",
+      "Depois de frio, corte um disco ligeiramente menor que o molde final.",
+      "Para a mousse, derreta o chocolate, emulsione com creme aquecido e amorne.",
+      "Bata o creme fresco em picos suaves e incorpore à ganache.",
+      "Monte com mousse, inserto, mais mousse e o disco de bolo.",
+      "Congele completamente, desenforme e descongele lentamente na geladeira antes de servir.",
+    ],
+    tip: "Cada camada deve estar na textura e temperatura adequadas antes da próxima etapa.",
+    mistake: "Tentar desenformar antes que o entremet esteja completamente congelado.",
+    storage: "Depois de descongelado, manter refrigerado e consumir em até 2 a 3 dias. Não recongelar.",
+  },
+];
+
+const RECIPE_LOOKUP = new Map(RECIPES.map((recipe) => [recipe.id, recipe]));
+
+const escapeHtml = (value) =>
+  String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+
+const getRecipeById = (recipeId) => RECIPE_LOOKUP.get(recipeId) || RECIPES[0];
+
+const buildCoverStyle = (recipe, variant = "card") => `background: ${recipe.cover?.[variant] || recipe.cover?.card || "linear-gradient(135deg, #f3e6dd, #e7cdb8)"};`;
+
+const renderRecipeCard = (recipe) => `
+  <a class="recipe-tile" data-recipe-card data-recipe-category="${recipe.category}" href="./receita.html?recipe=${encodeURIComponent(recipe.id)}" aria-label="${escapeHtml(recipe.title)}">
+    <div class="recipe-thumb ${recipe.id}" style="${buildCoverStyle(recipe, "card")}"></div>
+    <div class="recipe-body">
+      <span class="tag ${recipe.level === "basico" ? "basic" : recipe.level === "intermediario" ? "warning" : "danger"}">${RECIPE_LEVEL_LABELS[recipe.level] || "🟢 Básico"}</span>
+      <h3 class="recipe-title">${escapeHtml(recipe.title)}</h3>
+      <div class="recipe-meta">
+        <span>${escapeHtml(recipe.time)}</span>
+        <span>${escapeHtml(recipe.yield)}</span>
+      </div>
+      <div class="recipe-card-actions">
+        <span class="recipe-card-cta">Ver receita</span>
+      </div>
+    </div>
+  </a>
+`;
+
+const renderIngredientSections = (recipe) =>
+  recipe.ingredients
+    .map(
+      (section) => `
+        <section class="recipe-ingredient-section">
+          ${section.title ? `<h3>${escapeHtml(section.title)}</h3>` : ""}
+          <div class="checklist recipe-checklist-group">
+            ${section.items
+              .map(
+                (item) => `
+                  <label class="check-item"><input type="checkbox" data-ingredient-check /> ${escapeHtml(item)}</label>
+                `
+              )
+              .join("")}
+          </div>
+        </section>
+      `
+    )
+    .join("");
+
+const renderSteps = (recipe) =>
+  recipe.steps
+    .map((step) => `<div class="step">${escapeHtml(step)}</div>`)
+    .join("");
+
+const renderNotes = (recipe) => `
+  <article class="recipe-note">
+    <strong>Dica do confeiteiro</strong>
+    <p>${escapeHtml(recipe.tip)}</p>
+  </article>
+  <article class="recipe-note">
+    <strong>Erro comum</strong>
+    <p>${escapeHtml(recipe.mistake)}</p>
+  </article>
+  <article class="recipe-note">
+    <strong>Conservação</strong>
+    <p>${escapeHtml(recipe.storage)}</p>
+  </article>
+  <article class="recipe-note">
+    <strong>Temperatura</strong>
+    <p>${escapeHtml(recipe.temperature)}</p>
+  </article>
+`;
+
+const updateIngredientProgress = () => {
+  const recipePanel = document.querySelector("[data-recipe-ingredients]");
+  if (!recipePanel) return;
+  const checks = [...recipePanel.querySelectorAll("[data-ingredient-check]")];
+  const count = checks.filter((input) => input.checked).length;
+  const countLabel = document.querySelector("[data-ingredient-count]");
+  const progress = document.querySelector("[data-ingredient-progress]");
+  if (countLabel) countLabel.textContent = `${count} de ${checks.length} selecionados`;
+  if (progress) progress.style.width = `${checks.length ? Math.max(12, (count / checks.length) * 100) : 12}%`;
+};
+
 const getAuthToken = () => localStorage.getItem(AUTH_TOKEN_KEY);
 const setAuthToken = (token) => {
   if (!token) localStorage.removeItem(AUTH_TOKEN_KEY);
@@ -61,12 +442,18 @@ setActiveNav();
 
 if (page === "home") {
   const search = document.querySelector("[data-recipe-search]");
-  const cards = [...document.querySelectorAll("[data-recipe-card]")];
+  const recipeList = document.querySelector("[data-recipe-list]");
   const filters = [...document.querySelectorAll("[data-recipe-filter]")];
   const pantryInput = document.querySelector("[data-pantry-input]");
   const pantryResults = document.querySelector("[data-pantry-results]");
   const pantryPicks = [...document.querySelectorAll("[data-pantry-pick]")];
   let activeFilter = "all";
+  let cards = [];
+
+  if (recipeList) {
+    recipeList.innerHTML = RECIPES.map(renderRecipeCard).join("");
+    cards = [...document.querySelectorAll("[data-recipe-card]")];
+  }
 
   const applyRecipeFilters = () => {
     const q = search?.value.trim().toLowerCase() || "";
@@ -278,25 +665,52 @@ if (page === "login") {
 }
 
 if (page === "recipe") {
-  const tabs = [...document.querySelectorAll("[data-tab]")];
-  const panels = [...document.querySelectorAll("[data-panel]")];
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      const id = tab.dataset.tab;
-      tabs.forEach((t) => t.classList.toggle("active", t === tab));
-      panels.forEach((panel) => panel.classList.toggle("active", panel.dataset.panel === id));
-    });
-  });
-
-  const duration = 34 * 60;
+  const recipePage = document.querySelector(".recipe-page");
+  const recipeId = new URLSearchParams(location.search).get("recipe") || recipePage?.dataset.recipe || RECIPES[0].id;
+  const recipe = getRecipeById(recipeId);
+  const heroCover = document.querySelector("[data-recipe-cover]");
+  const categoryLabel = document.querySelector("[data-recipe-category]");
+  const titleEl = document.querySelector("[data-recipe-title]");
+  const summaryEl = document.querySelector("[data-recipe-summary]");
+  const ratingEl = document.querySelector("[data-recipe-rating]");
+  const timeEl = document.querySelector("[data-recipe-time]");
+  const levelEl = document.querySelector("[data-recipe-level]");
+  const yieldEl = document.querySelector("[data-recipe-yield]");
+  const tempEl = document.querySelector("[data-recipe-temperature]");
+  const ingredientPanel = document.querySelector("[data-recipe-ingredients]");
+  const stepPanel = document.querySelector("[data-recipe-steps]");
+  const notesPanel = document.querySelector("[data-recipe-notes]");
   const clock = document.querySelector("[data-timer]");
   const progress = document.querySelector("[data-progress]");
+  const backButton = document.querySelector(".hero-fab.back");
+  const tabs = [...document.querySelectorAll("[data-tab]")];
+  const panels = [...document.querySelectorAll("[data-panel]")];
+  const duration = (() => {
+    const match = String(recipe.timer || "25:00").match(/^(\d+):(\d{2})$/);
+    if (!match) return 25 * 60;
+    return Number(match[1]) * 60 + Number(match[2]);
+  })();
   let remaining = duration;
   let timer = null;
+
+  document.title = `Confeita - ${recipe.title}`;
+  if (heroCover) heroCover.style.background = recipe.cover?.hero || recipe.cover?.card || "linear-gradient(135deg, #cfc4bc 0%, #b9aa9c 18%, #e9e2dd 42%, #cfaeaa 68%, #8f6a57 100%)";
+  if (categoryLabel) categoryLabel.textContent = recipe.categoryBadge || recipe.categoryLabel || "🍰 Receita";
+  if (titleEl) titleEl.textContent = recipe.title;
+  if (summaryEl) summaryEl.textContent = recipe.summary || "";
+  if (ratingEl) ratingEl.innerHTML = `★ ${recipe.rating} <small>(${recipe.reviews} avaliações)</small>`;
+  if (timeEl) timeEl.textContent = `⏱ ${recipe.time}`;
+  if (levelEl) levelEl.textContent = RECIPE_LEVEL_LABELS[recipe.level] || "🟢 Básico";
+  if (yieldEl) yieldEl.textContent = `🍽 ${recipe.yield}`;
+  if (tempEl) tempEl.textContent = `🔥 ${recipe.temperature}`;
+  if (ingredientPanel) ingredientPanel.innerHTML = renderIngredientSections(recipe);
+  if (stepPanel) stepPanel.innerHTML = renderSteps(recipe);
+  if (notesPanel) notesPanel.innerHTML = renderNotes(recipe);
 
   const paint = () => {
     if (clock) clock.textContent = formatTime(remaining);
     if (progress) progress.style.width = `${((duration - remaining) / duration) * 100}%`;
+    updateIngredientProgress();
   };
   const startTimer = () => {
     if (timer) return;
@@ -309,6 +723,10 @@ if (page === "recipe") {
       }
     }, 1000);
   };
+  backButton?.addEventListener("click", () => {
+    location.href = "./confeita-identidade.html#receitas";
+  });
+
   paint();
   document.querySelector("[data-start-timer]")?.addEventListener("click", startTimer);
   document.querySelector("[data-reset-timer]")?.addEventListener("click", () => {
@@ -317,8 +735,19 @@ if (page === "recipe") {
     timer = null;
     paint();
   });
+  document.querySelectorAll("[data-ingredient-check]").forEach((check) => {
+    check.addEventListener("change", updateIngredientProgress);
+  });
+  updateIngredientProgress();
 
-  const recipeId = document.querySelector("[data-recipe]")?.dataset.recipe || "bolo-morango-chantilly";
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const id = tab.dataset.tab;
+      tabs.forEach((t) => t.classList.toggle("active", t === tab));
+      panels.forEach((panel) => panel.classList.toggle("active", panel.dataset.panel === id));
+    });
+  });
+
   const authStatus = document.querySelector("[data-auth-status]");
   const authForms = document.querySelector("[data-auth-forms]");
   const loginForm = document.querySelector("[data-login-form]");
@@ -383,7 +812,7 @@ if (page === "recipe") {
   const loadComments = async () => {
     if (!commentList) return;
     try {
-      const data = await apiRequest(`/api/comments?recipe=${encodeURIComponent(recipeId)}`);
+      const data = await apiRequest(`/api/comments?recipe=${encodeURIComponent(recipe.id)}`);
       renderComments(data.comments || []);
     } catch (error) {
       commentList.innerHTML = `<div class="comment-skeleton">Não foi possível carregar comentários: ${error.message}</div>`;
@@ -459,7 +888,7 @@ if (page === "recipe") {
       await apiRequest("/api/comments", {
         method: "POST",
         body: JSON.stringify({
-          recipe: recipeId,
+          recipe: recipe.id,
           text,
         }),
       });
