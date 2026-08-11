@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confeita - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="./assets/favicon.svg" />
+    <link rel="stylesheet" href="./theme.css" />
+    <script defer src="./app.js"></script>
+  </head>
+  <body data-page="login">
+    <div class="app-shell login-shell">
+      <header class="topbar">
+        <div class="topbar-inner">
+          <a class="brand" href="./confeita-identidade.html">
+            <img src="./assets/favicon.svg" alt="" width="38" height="38" />
+            <span class="brand-text"><strong>confeita</strong></span>
+          </a>
+          <nav class="nav-links" aria-label="Principal">
+            <a data-nav href="./confeita-identidade.html">Receitas</a>
+            <a data-nav href="./confeita-identidade.html">Desafios</a>
+            <a data-nav href="./comunidade.html">Comunidade</a>
+            <a data-nav href="./chat.html">Ajuda</a>
+          </nav>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <a class="btn btn-secondary" href="./confeita-identidade.html">Voltar</a>
+            <a class="nav-cta" href="./receita.html">Começar grátis</a>
+          </div>
+        </div>
+      </header>
+
+      <main class="login-page">
+        <section class="login-hero">
+          <div class="login-copy">
+            <span class="home-kicker">🔐 Acesso à conta Confeita</span>
+            <h1 class="home-title">Entre para salvar receitas, comentar e acompanhar seu nível</h1>
+            <p class="lead">
+              Uma conta libera comentários, favoritos, progresso da comunidade e a experiência completa da Confeita.
+            </p>
+
+            <div class="login-benefits">
+              <div class="login-benefit">
+                <strong>Comente nas receitas</strong>
+                <span class="muted">Sua opinião aparece com sua conta</span>
+              </div>
+              <div class="login-benefit">
+                <strong>Salve favoritos</strong>
+                <span class="muted">Guarde o que quer fazer depois</span>
+              </div>
+              <div class="login-benefit">
+                <strong>Evolua na comunidade</strong>
+                <span class="muted">Comece do básico e avance no seu ritmo</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="auth-card login-card">
+            <div class="auth-card-head">
+              <div>
+                <p class="eyebrow">Entrar na Confeita</p>
+                <h2>Acesse sua conta</h2>
+                <p class="muted">Use o e-mail e a senha cadastrados para liberar seu acesso.</p>
+              </div>
+              <div class="auth-badge" data-auth-status>Faça login</div>
+            </div>
+
+            <form class="auth-form" data-login-form>
+              <label class="field">
+                <span>E-mail</span>
+                <input type="email" name="email" placeholder="voce@exemplo.com" required />
+              </label>
+              <label class="field">
+                <span>Senha</span>
+                <input type="password" name="password" placeholder="Sua senha" required />
+              </label>
+              <button class="btn btn-primary" type="submit">Entrar</button>
+            </form>
+
+            <div class="login-actions">
+              <button class="btn btn-secondary" type="button" data-login-continue hidden>Continuar navegando</button>
+              <a class="btn btn-secondary" href="./receita.html">Ver receitas</a>
+            </div>
+
+            <p class="muted login-hint" data-login-hint>Use seu e-mail e senha cadastrados para entrar.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <nav class="bottom-bar" aria-label="Navegação inferior">
+      <div class="tabbar">
+        <a data-nav href="./confeita-identidade.html">Home</a>
+        <a data-nav href="./receita.html">Receita</a>
+        <a data-nav href="./comunidade.html">Comunidade</a>
+        <a data-nav href="./chat.html">Ajuda</a>
+        <a data-nav href="./perfil.html">Perfil</a>
+      </div>
+    </nav>
+  </body>
+</html>

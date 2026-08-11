@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Confeita app icon 256">
+  <rect width="256" height="256" rx="64" fill="#f4e3d7"/>
+  <circle cx="128" cy="120" r="80" fill="#f58fb1"/>
+  <path d="M74 132c12-16 33-24 54-24s42 8 54 24c-3 31-22 48-54 48s-51-17-54-48Z" fill="#fff8f2"/>
+  <circle cx="100" cy="108" r="8" fill="#2e1d18"/><circle cx="156" cy="108" r="8" fill="#2e1d18"/>
+  <path d="M102 128c8 8 44 8 52 0" fill="none" stroke="#5c3a2e" stroke-width="8" stroke-linecap="round"/>
+  <path d="M119 72c8-8 18-12 26-12 8 11 8 19 4 24" fill="none" stroke="#f6c667" stroke-width="10" stroke-linecap="round"/>
+</svg>

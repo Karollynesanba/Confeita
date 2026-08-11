@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confeita - Perfil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="./assets/favicon.svg" />
+    <link rel="stylesheet" href="./theme.css" />
+    <script defer src="./app.js"></script>
+  </head>
+  <body data-page="profile">
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="topbar-inner">
+          <a class="brand" href="./confeita-identidade.html"><img src="./assets/favicon.svg" alt="" width="42" height="42" /><span class="brand-text"><strong>Confeita</strong><span>doçura, afeto e IA</span></span></a>
+          <nav class="nav-links"><a data-nav href="./confeita-identidade.html">Home</a><a data-nav href="./receita.html">Receita</a><a data-nav href="./comunidade.html">Comunidade</a><a data-nav href="./chat.html">Ajuda</a><a data-nav href="./perfil.html">Perfil</a></nav>
+          <a class="nav-cta" href="./confeita-identidade.html">Ver home</a>
+        </div>
+      </header>
+      <main class="screen active">
+        <section class="profile-cover"></section>
+        <section class="section profile-main" style="margin-top:-40px">
+          <aside>
+            <div class="avatar"></div>
+            <h1 style="margin-top:14px">Luna Padeiro</h1>
+            <p class="muted">Nível 12 · Confeiteira da semana</p>
+            <div class="xp"><span></span></div>
+            <div class="stats" style="margin-top:18px">
+              <div class="stat"><strong>1280 XP</strong><div class="muted">Progresso para o nível 13</div></div>
+              <div class="stat"><strong>32 receitas</strong><div class="muted">Favoritas e testadas</div></div>
+              <div class="stat"><strong>14 badges</strong><div class="muted">Conquistas desbloqueadas</div></div>
+            </div>
+          </aside>
+          <div>
+            <div class="tabs">
+              <button class="tab-btn active" data-profile-tab="achievements" type="button">Conquistas</button>
+              <button class="tab-btn" data-profile-tab="favorites" type="button">Favoritos</button>
+              <button class="tab-btn" data-profile-tab="posts" type="button">Publicações</button>
+            </div>
+            <div class="tab-panel active" data-profile-panel="achievements">
+              <div class="badges">
+                <div class="badge-card">🏅 Ponto perfeito</div>
+                <div class="badge-card">🍫 Rainha do cacau</div>
+                <div class="badge-card locked">✨ Cobertura brilhante</div>
+                <div class="badge-card">🎂 Festa em camadas</div>
+                <div class="badge-card locked">🧁 Vitrine ideal</div>
+                <div class="badge-card">🧁 Confeita Pro</div>
+              </div>
+            </div>
+            <div class="tab-panel" data-profile-panel="favorites">
+              <div class="grid-2">
+                <div class="comment"><strong>Bolo Nuvem Rosé</strong><p class="muted">Favorito por textura leve e acabamento delicado.</p></div>
+                <div class="comment"><strong>Brownie Chocolate Denso</strong><p class="muted">Salvo para pedidos especiais e enxoval de festa.</p></div>
+              </div>
+            </div>
+            <div class="tab-panel" data-profile-panel="posts">
+              <div class="grid-2">
+                <div class="comment"><strong>Hoje testei uma nova cobertura</strong><p class="muted">Recebeu 42 curtidas e 11 comentários.</p></div>
+                <div class="comment"><strong>Desafio da semana concluído</strong><p class="muted">Compartilhou o passo a passo e ganhou XP extra.</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <nav class="bottom-bar"><div class="tabbar"><a data-nav href="./confeita-identidade.html">Home</a><a data-nav href="./receita.html">Receita</a><a data-nav href="./comunidade.html">Comunidade</a><a data-nav href="./chat.html">Ajuda</a><a data-nav href="./perfil.html">Perfil</a></div></nav>
+  </body>
+</html>

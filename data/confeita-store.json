@@ -1,0 +1,22 @@
+{
+  "users": [],
+  "sessions": {},
+  "comments": [
+    {
+      "id": "47930c92-de66-44fb-ae13-3e055bfdc77f",
+      "recipe": "bolo-morango-chantilly",
+      "userId": "seed",
+      "userName": "Ana Claudia S.",
+      "text": "A massa ficou fofinha e o passo a passo é muito claro.",
+      "createdAt": "2026-08-01T14:30:00.000Z"
+    },
+    {
+      "id": "75edf050-5012-45e3-94b4-b95e259683c7",
+      "recipe": "bolo-morango-chantilly",
+      "userId": "seed",
+      "userName": "Mariana Oliveira",
+      "text": "Ótima receita para festa. O chantilly fica leve e bonito.",
+      "createdAt": "2026-08-02T19:05:00.000Z"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confeita - Modo Cozinhar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="./assets/favicon.svg" />
+    <link rel="stylesheet" href="./theme.css" />
+    <script defer src="./app.js"></script>
+  </head>
+  <body data-page="cook">
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="topbar-inner">
+          <a class="brand" href="./confeita-identidade.html"><img src="./assets/favicon.svg" alt="" width="42" height="42" /><span class="brand-text"><strong>Confeita</strong><span>doçura, afeto e IA</span></span></a>
+          <nav class="nav-links"><a data-nav href="./confeita-identidade.html">Home</a><a data-nav href="./receita.html">Receita</a><a data-nav href="./comunidade.html">Comunidade</a><a data-nav href="./chat.html">Ajuda</a><a data-nav href="./perfil.html">Perfil</a></nav>
+          <a class="nav-cta" href="./chat.html">Perguntar à IA</a>
+        </div>
+      </header>
+      <main class="screen active">
+        <section class="cook-shell">
+          <p class="eyebrow">Modo cozinhar</p>
+          <h1>Ambiente imersivo com foco total no preparo.</h1>
+          <p class="lead" style="color:rgba(255,255,255,.76)">Fundo chocolate, progresso visual por etapa, cronômetro e dica destacada para você cozinhar sem perder o ritmo.</p>
+          <div class="cook-grid" style="margin-top:18px">
+            <div class="cook-card">
+              <div class="progress"><span data-cook-progress></span></div>
+              <div class="cook-step" data-cook-step><span>1. Preparar a base</span><span>✓</span></div>
+              <div class="cook-step" data-cook-step><span>2. Misturar e bater</span><span>✓</span></div>
+              <div class="cook-step" data-cook-step><span>3. Assar e ajustar</span><span>✓</span></div>
+              <div class="cook-step" data-cook-step><span>4. Finalizar a cobertura</span><span>✓</span></div>
+              <div class="inline-actions">
+                <button class="btn btn-primary" data-cook-prev type="button">Anterior</button>
+                <button class="btn btn-secondary" data-cook-next type="button">Próximo</button>
+              </div>
+            </div>
+            <div class="cook-card">
+              <div class="big-timer" data-cook-timer>09:00</div>
+              <div class="inline-actions">
+                <button class="btn btn-primary" data-cook-start type="button">Iniciar cronômetro</button>
+                <button class="btn btn-secondary" data-cook-reset type="button">Reiniciar</button>
+              </div>
+              <div class="floating-note">
+                <strong>Dica do chef</strong>
+                <p class="muted" data-cook-tip>Mexa sempre em fogo médio para manter a textura cremosa.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <nav class="bottom-bar"><div class="tabbar"><a data-nav href="./confeita-identidade.html">Home</a><a data-nav href="./receita.html">Receita</a><a data-nav href="./comunidade.html">Comunidade</a><a data-nav href="./chat.html">Ajuda</a><a data-nav href="./perfil.html">Perfil</a></div></nav>
+  </body>
+</html>

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confeita - Receita</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="./assets/favicon.svg" />
+    <link rel="stylesheet" href="./theme.css" />
+    <script defer src="./app.js"></script>
+  </head>
+  <body data-page="recipe">
+    <div class="app-shell recipe-shell">
+      <header class="topbar recipe-topbar">
+        <div class="topbar-inner">
+          <a class="brand" href="./confeita-identidade.html">
+            <img src="./assets/favicon.svg" alt="" width="38" height="38" />
+            <span class="brand-text"><strong>confeita</strong></span>
+          </a>
+          <nav class="nav-links">
+            <a data-nav href="./confeita-identidade.html">Receitas</a>
+            <a data-nav href="./confeita-identidade.html">Desafios</a>
+            <a data-nav href="./comunidade.html">Comunidade</a>
+            <a data-nav href="./chat.html">Ajuda</a>
+          </nav>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <a class="btn btn-secondary" href="./login.html">Entrar</a>
+            <a class="nav-cta" href="./receita.html">Começar grátis</a>
+          </div>
+        </div>
+      </header>
+
+      <main class="recipe-page" data-recipe="bolo-morango-chantilly">
+        <section class="recipe-hero-frame">
+          <div class="recipe-hero-bg">
+            <div class="hero-overlay"></div>
+            <button class="hero-fab back" type="button" aria-label="Voltar">‹</button>
+            <button class="hero-fab heart" type="button" aria-label="Favoritar">♡</button>
+            <button class="hero-fab bookmark" type="button" aria-label="Salvar">⌁</button>
+            <div class="hero-play">▶</div>
+            <div class="hero-badge">🍰 Bolos</div>
+            <div class="hero-title-block">
+              <h1>Bolo de Morango com Chantilly</h1>
+            </div>
+          </div>
+
+          <div class="recipe-meta-card">
+            <span class="meta-pill">★ 4.8 <small>(234 avaliações)</small></span>
+            <span class="meta-pill">⏱ 1h 20min</span>
+            <span class="meta-pill">👩‍🍳 Médio</span>
+            <span class="meta-pill">🍽 8 porções</span>
+          </div>
+
+          <div class="recipe-author-row">
+            <div class="author-chip">
+              <span class="avatar-circle">SA</span>
+              <div>
+                <strong>Chef Sofia Almeida</strong>
+                <small class="muted">Confeiteira profissional · 128 receitas</small>
+              </div>
+            </div>
+            <a class="btn btn-secondary" href="./chat.html" style="padding-inline:18px;">Seguir</a>
+          </div>
+
+          <div class="recipe-timer-row">
+            <div class="timer-label">Timer de preparo</div>
+            <div class="timer-main">
+              <strong data-timer>25:00</strong>
+              <div class="timer-actions">
+                <button class="btn btn-primary" data-start-timer type="button">Iniciar</button>
+                <button class="btn btn-secondary" data-reset-timer type="button">Reset</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="recipe-tabs">
+            <button class="tab-btn active" data-tab="ingredients" type="button">Ingredientes</button>
+            <button class="tab-btn" data-tab="method" type="button">Modo de Preparo</button>
+            <button class="tab-btn" data-tab="comments" type="button">Comentários</button>
+          </div>
+
+          <div class="tab-panel active" data-panel="ingredients">
+            <div class="checklist recipe-checklist">
+              <label class="check-item"><input type="checkbox" /> 300g de farinha de trigo</label>
+              <label class="check-item"><input type="checkbox" /> 200g de açúcar refinado</label>
+              <label class="check-item"><input type="checkbox" /> 150g de manteiga sem sal (ponto pomada)</label>
+              <label class="check-item"><input type="checkbox" /> 3 ovos grandes em temperatura ambiente</label>
+              <label class="check-item"><input type="checkbox" /> 200ml de leite integral</label>
+              <label class="check-item"><input type="checkbox" /> 1 colher de chá de extrato de baunilha</label>
+              <label class="check-item"><input type="checkbox" /> 1 colher de sopa de fermento em pó</label>
+              <label class="check-item"><input type="checkbox" /> 200g de morangos frescos fatiados</label>
+              <label class="check-item"><input type="checkbox" /> 300ml de creme de leite fresco gelado</label>
+              <label class="check-item"><input type="checkbox" /> 2 col. de sopa de açúcar de confeiteiro</label>
+            </div>
+            <div class="ingredients-footer">
+              <span class="muted">0 de 10 selecionados</span>
+              <span class="progress-mini"><span></span></span>
+            </div>
+          </div>
+
+          <div class="tab-panel" data-panel="method">
+            <div class="step-list">
+              <div class="step">Pré-aqueça o forno e prepare as formas.</div>
+              <div class="step">Misture secos e cremosos até ficar homogêneo.</div>
+              <div class="step">Asse, espere esfriar e monte com morangos.</div>
+              <div class="step">Finalize com chantilly e açúcar de confeiteiro.</div>
+            </div>
+          </div>
+
+          <div class="tab-panel" data-panel="comments">
+            <div class="auth-card">
+              <div class="auth-card-head">
+                <div>
+                  <p class="eyebrow">Comentários da comunidade</p>
+                  <h2>Somente contas podem comentar</h2>
+                  <p class="muted">Faça login ou crie uma conta para deixar sua avaliação nesta receita.</p>
+                </div>
+                <div class="auth-badge" data-auth-status>Verificando conta...</div>
+              </div>
+
+              <div class="auth-grid" data-auth-forms>
+                <form class="auth-form" data-login-form>
+                  <h3>Entrar</h3>
+                  <label class="field">
+                    <span>E-mail</span>
+                    <input type="email" name="email" placeholder="voce@exemplo.com" required />
+                  </label>
+                  <label class="field">
+                    <span>Senha</span>
+                    <input type="password" name="password" placeholder="Sua senha" required />
+                  </label>
+                  <button class="btn btn-primary" type="submit">Entrar</button>
+                </form>
+
+                <form class="auth-form" data-register-form>
+                  <h3>Criar conta</h3>
+                  <label class="field">
+                    <span>Nome</span>
+                    <input type="text" name="name" placeholder="Seu nome" required />
+                  </label>
+                  <label class="field">
+                    <span>E-mail</span>
+                    <input type="email" name="email" placeholder="voce@exemplo.com" required />
+                  </label>
+                  <label class="field">
+                    <span>Senha</span>
+                    <input type="password" name="password" placeholder="Crie uma senha" required />
+                  </label>
+                  <button class="btn btn-secondary" type="submit">Criar conta</button>
+                </form>
+              </div>
+
+              <div class="comment-compose" data-comment-composer hidden>
+                <div class="composer-top">
+                  <div>
+                    <strong>Escreva seu comentário</strong>
+                    <p class="muted">Sua conta ficará visível ao publicar.</p>
+                  </div>
+                  <button class="btn btn-secondary" data-logout-button type="button">Sair</button>
+                </div>
+                <label class="field">
+                  <span>Comentário</span>
+                  <textarea data-comment-text rows="4" placeholder="Conta o que você achou da receita..." required></textarea>
+                </label>
+                <div class="composer-actions">
+                  <span class="muted" data-comment-hint>Você pode avaliar a receita e deixar uma dica útil.</span>
+                  <button class="btn btn-primary" data-comment-submit type="button">Publicar comentário</button>
+                </div>
+              </div>
+
+              <div class="comment-list" data-comment-list>
+                <div class="comment-skeleton">Carregando comentários...</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="recipe-bottom-actions">
+            <a class="btn btn-primary" href="./cozinhar.html">Iniciar Modo Cozinhar</a>
+            <a class="btn btn-secondary" href="./chat.html">Perguntar à IA</a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <nav class="bottom-bar" aria-label="Navegação inferior">
+      <div class="tabbar">
+        <a data-nav href="./confeita-identidade.html">Home</a>
+        <a data-nav href="./receita.html">Receita</a>
+        <a data-nav href="./chat.html">Ajuda</a>
+        <a data-nav href="./comunidade.html">Comunidade</a>
+        <a data-nav href="./perfil.html">Perfil</a>
+      </div>
+    </nav>
+  </body>
+</html>

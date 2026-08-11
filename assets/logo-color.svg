@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 312" role="img" aria-label="Confeita logo colorida">
+  <defs>
+    <linearGradient id="cupcakeFill" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#fff8f2"/>
+      <stop offset="100%" stop-color="#fff3f7"/>
+    </linearGradient>
+    <linearGradient id="pinkCup" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f9a7bb"/>
+      <stop offset="100%" stop-color="#f58fb1"/>
+    </linearGradient>
+  </defs>
+  <rect width="920" height="312" rx="44" fill="#fff8f2"/>
+  <g transform="translate(38 20)">
+    <circle cx="130" cy="110" r="98" fill="#ffd6e2" stroke="#5c3a2e" stroke-width="8"/>
+    <path d="M66 128c8-26 31-43 64-43s56 17 64 43c-4 35-29 56-64 56s-60-21-64-56Z" fill="url(#cupcakeFill)" stroke="#5c3a2e" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M96 79c8-12 20-20 34-23 14 3 25 11 32 25" fill="none" stroke="#f6c667" stroke-width="10" stroke-linecap="round"/>
+    <path d="M127 42c4-6 9-9 15-10 4 6 5 11 4 17" fill="none" stroke="#f58fb1" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="98" cy="112" r="10" fill="#5c3a2e"/>
+    <circle cx="158" cy="112" r="10" fill="#5c3a2e"/>
+    <circle cx="94" cy="107" r="3" fill="#fff"/>
+    <circle cx="154" cy="107" r="3" fill="#fff"/>
+    <circle cx="88" cy="138" r="11" fill="#f8b0bd"/>
+    <circle cx="170" cy="138" r="11" fill="#f8b0bd"/>
+    <path d="M114 134c10 9 18 9 28 0" fill="none" stroke="#5c3a2e" stroke-width="7" stroke-linecap="round"/>
+    <path d="M76 195h108v44c0 12-10 22-22 22H98c-12 0-22-10-22-22v-44Z" fill="url(#pinkCup)" stroke="#5c3a2e" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M98 192v74M120 192v74M142 192v74M164 192v74" stroke="#e86f98" stroke-width="6" stroke-linecap="round" opacity=".85"/>
+    <path d="M176 76c6 3 11 8 15 15" fill="none" stroke="#5c3a2e" stroke-width="7" stroke-linecap="round"/>
+    <path d="M208 142c-12 26-22 54-28 85" fill="none" stroke="#5c3a2e" stroke-width="8" stroke-linecap="round"/>
+    <path d="M204 88l24 76-20 2-18-72" fill="none" stroke="#5c3a2e" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M216 88l12 68" fill="none" stroke="#5c3a2e" stroke-width="8" stroke-linecap="round"/>
+    <path d="M230 92l-18 66" fill="none" stroke="#5c3a2e" stroke-width="8" stroke-linecap="round"/>
+    <path d="M80 54l5 10 11 2-8 7 2 11-10-6-10 6 2-11-8-7 11-2Z" fill="#f58fb1"/>
+    <path d="M224 40l4 8 9 1-6 6 1 9-8-4-8 4 1-9-6-6 9-1Z" fill="#5c3a2e"/>
+    <path d="M248 124c-4 0-8 3-10 7 4 1 8 4 10 8 2-4 6-7 10-8-2-4-6-7-10-7Z" fill="#f6c667"/>
+    <path d="M50 150c-4 0-7 3-8 7 4 1 7 3 8 7 1-4 4-6 8-7-1-4-4-7-8-7Z" fill="#5c3a2e"/>
+  </g>
+  <text x="338" y="166" fill="#5c3a2e" font-family="Fredoka, Arial, sans-serif" font-size="96" font-weight="700" letter-spacing="-3">Con</text>
+  <text x="470" y="166" fill="#f58fb1" font-family="Fredoka, Arial, sans-serif" font-size="96" font-weight="700" letter-spacing="-3">f</text>
+  <text x="500" y="166" fill="#5c3a2e" font-family="Fredoka, Arial, sans-serif" font-size="96" font-weight="700" letter-spacing="-3">eita</text>
+  <text x="342" y="210" fill="#7d665e" font-family="Poppins, Arial, sans-serif" font-size="24" letter-spacing="1.8">receitas, dicas e amor em cada doce</text>
+</svg>

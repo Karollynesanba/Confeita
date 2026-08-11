@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confeita - Chef IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="./assets/favicon.svg" />
+    <link rel="stylesheet" href="./theme.css" />
+    <script defer src="./app.js"></script>
+  </head>
+  <body data-page="chat">
+    <header class="topbar chat-topbar">
+      <div class="topbar-inner">
+        <div class="chat-header-left">
+          <button class="hero-fab" type="button" aria-label="Voltar" style="position:static;">‹</button>
+          <div class="chat-header-avatar">CI</div>
+          <div>
+            <strong>Chef IA</strong>
+            <small>Especialista em confeitaria</small>
+          </div>
+        </div>
+      <a class="hero-fab" href="./comunidade.html" aria-label="Comunidade" style="position:static; display:grid; place-items:center;">⌁</a>
+      </div>
+    </header>
+
+    <main class="chat-page-main">
+      <section class="chat-board" data-chat-stream>
+        <div class="chat-line">
+          <div class="chat-header-avatar">CI</div>
+          <div class="chat-bubble">Olá! Sou o Chef IA da Confeita! 🎂 Estou aqui para te ajudar com qualquer dúvida de confeitaria. Sobre o que posso te ajudar hoje?</div>
+        </div>
+        <div class="chat-line">
+          <div class="chat-header-avatar">CI</div>
+          <div class="chat-bubble">Posso ajudar com técnicas, substituições, dicas de decoração e muito mais. É só perguntar!</div>
+        </div>
+
+        <div class="chat-pills">
+          <button class="pill" data-prompt="Como fazer ganache brilhante?">Como fazer ganache brilhante?</button>
+          <button class="pill" data-prompt="Meu bolo afundou, o que fazer?">Meu bolo afundou, o que fazer?</button>
+          <button class="pill" data-prompt="Posso trocar manteiga por óleo?">Posso trocar manteiga por óleo?</button>
+          <button class="pill" data-prompt="Segredo do chantilly firme">Segredo do chantilly firme</button>
+          <button class="pill" data-prompt="Como evitar macaron rachado?">Como evitar macaron rachado?</button>
+        </div>
+      </section>
+    </main>
+
+    <div class="chat-input-bar">
+      <input data-chat-input type="text" placeholder="Pergunte ao Chef IA..." />
+      <button class="chat-mic" type="button">🎤</button>
+      <button class="chat-send" data-chat-send type="button">➤</button>
+    </div>
+  </body>
+</html>
