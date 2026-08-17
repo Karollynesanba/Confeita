@@ -54,9 +54,9 @@ async function ensureStore() {
   }
   const raw = await fs.readFile(STORE_FILE, "utf8");
   store = JSON.parse(raw);
-  store.users ??= [];
-  store.sessions ??= {};
-  store.comments ??= [];
+  if (!Array.isArray(store.users)) store.users = [];
+  if (!store.sessions || typeof store.sessions !== "object") store.sessions = {};
+  if (!Array.isArray(store.comments)) store.comments = [];
 }
 
 async function persistStore() {
@@ -318,7 +318,7 @@ async function main() {
         return;
       }
 
-      let pathname = urlObj.pathname === "/" ? "/index.html" : urlObj.pathname;
+      let pathname = urlObj.pathname === "/" ?"/index.html" : urlObj.pathname;
       pathname = pathname.replace(/\\/g, "/");
       const filePath = path.join(ROOT, pathname);
       if (!filePath.startsWith(ROOT)) {

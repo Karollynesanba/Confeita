@@ -7,28 +7,73 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="icon" href="./assets/favicon.svg" />
+    <link rel="icon" href="./assets/logo-exact.png" />
     <link rel="stylesheet" href="./theme.css" />
     <script defer src="./app.js"></script>
   </head>
   <body data-page="community">
     <div class="app-shell community-shell">
-      <header class="topbar">
-        <div class="topbar-inner">
+      <header class="topbar topbar-home" data-home-header>
+        <div class="topbar-inner topbar-inner-home">
           <a class="brand" href="./confeita-identidade.html">
-            <img src="./assets/favicon.svg" alt="" width="42" height="42" />
-            <span class="brand-text">
-              <strong>confeita</strong>
-            </span>
+            <img class="brand-mark" src="./assets/logo-exact.png" alt="Confeita" />
           </a>
-          <nav class="nav-links" aria-label="Principal">
-            <a data-nav href="./confeita-identidade.html">Home</a>
+          <nav class="nav-links nav-links-main" aria-label="Principal">
             <a data-nav href="./receita.html">Receitas</a>
             <a data-nav href="./comunidade.html">Comunidade</a>
-            <a data-nav href="./chat.html">Ajuda</a>
-            <a data-nav href="./perfil.html">Perfil</a>
           </nav>
-          <a class="nav-cta" href="#publicar">Publicar receita</a>
+          <div class="category-picker nav-categories" data-category-picker>
+            <button class="filter-chip category-trigger" type="button" data-categories-toggle aria-expanded="false" aria-controls="community-category-menu">
+              <span>Categorias</span>
+              <span class="category-caret" aria-hidden="true">▾</span>
+            </button>
+            <div class="category-menu" id="community-category-menu" data-categories-menu hidden>
+              <button class="category-option active" type="button" data-recipe-filter="all">Todas</button>
+              <button class="category-option" type="button" data-recipe-filter="bolos">Bolos</button>
+              <button class="category-option" type="button" data-recipe-filter="cupcakes">Cupcakes</button>
+              <button class="category-option" type="button" data-recipe-filter="tortas">Tortas</button>
+              <button class="category-option" type="button" data-recipe-filter="paes">Pães</button>
+              <button class="category-option" type="button" data-recipe-filter="mousses">Mousses</button>
+              <button class="category-option" type="button" data-recipe-filter="macarons">Macarons</button>
+              <button class="category-option" type="button" data-recipe-filter="sobremesas">Sobremesas</button>
+            </div>
+          </div>
+          <div class="header-actions">
+            <a class="btn btn-secondary header-login" href="./login.html">Entrar</a>
+            <a class="nav-cta header-cta" href="./receita.html">Começar grátis</a>
+            <button class="header-menu-toggle" type="button" data-header-menu-toggle aria-expanded="false" aria-controls="community-header-drawer" aria-label="Abrir menu">
+              <span class="sr-only">Abrir menu</span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+        <div class="header-drawer" id="community-header-drawer" data-header-drawer hidden>
+          <nav class="header-drawer-links" aria-label="Principal">
+            <a data-nav href="./receita.html">Receitas</a>
+            <a data-nav href="./comunidade.html">Comunidade</a>
+          </nav>
+          <div class="header-drawer-categories" data-category-picker>
+            <button class="filter-chip category-trigger" type="button" data-categories-toggle aria-expanded="false" aria-controls="community-category-menu-drawer">
+              <span>Categorias</span>
+              <span class="category-caret" aria-hidden="true">▾</span>
+            </button>
+            <div class="category-menu category-menu-drawer" id="community-category-menu-drawer" data-categories-menu hidden>
+              <button class="category-option active" type="button" data-recipe-filter="all">Todas</button>
+              <button class="category-option" type="button" data-recipe-filter="bolos">Bolos</button>
+              <button class="category-option" type="button" data-recipe-filter="cupcakes">Cupcakes</button>
+              <button class="category-option" type="button" data-recipe-filter="tortas">Tortas</button>
+              <button class="category-option" type="button" data-recipe-filter="paes">Pães</button>
+              <button class="category-option" type="button" data-recipe-filter="mousses">Mousses</button>
+              <button class="category-option" type="button" data-recipe-filter="macarons">Macarons</button>
+              <button class="category-option" type="button" data-recipe-filter="sobremesas">Sobremesas</button>
+            </div>
+          </div>
+          <div class="header-drawer-actions">
+            <a class="btn btn-secondary header-login" href="./login.html">Entrar</a>
+            <a class="nav-cta header-cta" href="./receita.html">Começar grátis</a>
+          </div>
         </div>
       </header>
 
@@ -37,10 +82,6 @@
           <div>
             <span class="eyebrow">Comunidade Confeita</span>
             <h1>Receitas do básico ao avançado, criadas por quem ama confeitaria</h1>
-            <p class="lead">
-              Aqui a comunidade publica receitas, compartilha técnicas e evolui de nível conforme participa.
-              Cada postagem ajuda a construir uma trilha entre o básico, o intermediário e o avançado.
-            </p>
             <div class="hero-actions">
               <a class="btn btn-primary" href="#publicar">Postar receita</a>
               <a class="btn btn-secondary" href="#feed">Explorar feed</a>
@@ -99,7 +140,7 @@
             <div>
               <p class="eyebrow">Feed da comunidade</p>
               <h2>Publicações recentes</h2>
-              <p class="muted">Filtre por nível e veja receitas pensadas para cada etapa da jornada.</p>
+              <p class="muted" data-community-filter-hint>Filtre por nível.</p>
             </div>
             <div class="community-filters" role="tablist" aria-label="Filtrar publicações">
               <button class="community-filter active" type="button" data-community-filter="all">Todas</button>
@@ -113,7 +154,7 @@
             <aside class="community-panel" id="publicar">
               <p class="eyebrow">Publicar</p>
               <h3>Compartilhe sua receita</h3>
-              <p class="muted">O que você postar entra no feed da comunidade e rende XP de acordo com o nível.</p>
+              <p class="muted">O que você postar entra no feed e rende XP.</p>
 
               <form class="community-form" data-community-form>
                 <div class="community-form-grid">
@@ -155,12 +196,12 @@
             </aside>
 
             <div class="community-feed" data-community-feed>
-              <article class="community-post" data-community-post data-level="basico">
-                <div class="community-thumb cake"></div>
+              <article class="community-post" data-community-post data-level="basico" data-recipe-id="bolo-caneca-chocolate">
+                <div class="community-thumb mug-cake"></div>
                 <div class="community-post-head">
                   <div>
                     <span class="community-level basic">Básico</span>
-                    <h3>Bolo de chocolate de caneca</h3>
+                    <h3><a href="./receita.html?recipe=bolo-caneca-chocolate">Bolo de chocolate de caneca</a></h3>
                   </div>
                   <div class="community-meta">
                     <span>⏱ 15 min</span>
@@ -168,7 +209,7 @@
                     <span>💬 12</span>
                   </div>
                 </div>
-                <p class="muted">Receita simples, rápida e perfeita para quem está começando no mundo da confeitaria.</p>
+                <p class="muted">Simples, rápida e ótima para começar.</p>
                 <div class="community-post-footer">
                   <div class="author-chip">
                     <span class="avatar-circle">LP</span>
@@ -181,8 +222,8 @@
                 </div>
               </article>
 
-              <article class="community-post" data-community-post data-level="intermediario">
-                <div class="community-thumb macaron"></div>
+              <article class="community-post" data-community-post data-level="intermediario" data-thumb="raspberry-macaron">
+                <div class="community-thumb raspberry-macaron"></div>
                 <div class="community-post-head">
                   <div>
                     <span class="community-level intermediate">Intermediário</span>
@@ -194,7 +235,7 @@
                     <span>💬 24</span>
                   </div>
                 </div>
-                <p class="muted">Massa delicada, recheio leve e acabamento elegante para treinar precisão sem complicar.</p>
+                <p class="muted">Delicado, leve e elegante.</p>
                 <div class="community-post-footer">
                   <div class="author-chip">
                     <span class="avatar-circle">MA</span>
@@ -207,8 +248,8 @@
                 </div>
               </article>
 
-              <article class="community-post" data-community-post data-level="avancado">
-                <div class="community-thumb brownie"></div>
+              <article class="community-post" data-community-post data-level="avancado" data-thumb="mousse">
+                <div class="community-thumb mousse"></div>
                 <div class="community-post-head">
                   <div>
                     <span class="community-level advanced">Avançado</span>
@@ -220,7 +261,7 @@
                     <span>💬 31</span>
                   </div>
                 </div>
-                <p class="muted">Estrutura firme, mousse aerada e brilho de vitrine para quem quer um resultado premium.</p>
+                <p class="muted">Estrutura firme e acabamento premium.</p>
                 <div class="community-post-footer">
                   <div class="author-chip">
                     <span class="avatar-circle">PL</span>
@@ -233,12 +274,12 @@
                 </div>
               </article>
 
-              <article class="community-post" data-community-post data-level="basico">
-                <div class="community-thumb tart"></div>
+              <article class="community-post" data-community-post data-level="basico" data-recipe-id="mini-tortas-limao-cremosas" data-thumb="lemon-mini">
+                <div class="community-thumb lemon-mini"></div>
                 <div class="community-post-head">
                   <div>
                     <span class="community-level basic">Básico</span>
-                    <h3>Mini tortas de limão cremosas</h3>
+                    <h3><a href="./receita.html?recipe=mini-tortas-limao-cremosas">Mini tortas de limão cremosas</a></h3>
                   </div>
                   <div class="community-meta">
                     <span>⏱ 40 min</span>
@@ -246,7 +287,7 @@
                     <span>💬 15</span>
                   </div>
                 </div>
-                <p class="muted">Receita de poucas etapas com resultado bonito e sabor equilibrado para o dia a dia.</p>
+                <p class="muted">Poucas etapas e ótimo resultado.</p>
                 <div class="community-post-footer">
                   <div class="author-chip">
                     <span class="avatar-circle">CL</span>
@@ -259,12 +300,12 @@
                 </div>
               </article>
 
-              <article class="community-post" data-community-post data-level="intermediario">
-                <div class="community-thumb cake"></div>
+              <article class="community-post" data-community-post data-level="intermediario" data-recipe-id="bolo-laranja-calda-brilhante" data-thumb="orange-cake">
+                <div class="community-thumb orange-cake"></div>
                 <div class="community-post-head">
                   <div>
                     <span class="community-level intermediate">Intermediário</span>
-                    <h3>Bolo de laranja com calda brilhante</h3>
+                    <h3><a href="./receita.html?recipe=bolo-laranja-calda-brilhante">Bolo de laranja com calda brilhante</a></h3>
                   </div>
                   <div class="community-meta">
                     <span>⏱ 55 min</span>
@@ -272,7 +313,7 @@
                     <span>💬 18</span>
                   </div>
                 </div>
-                <p class="muted">Crocância leve por fora, maciez por dentro e uma calda de acabamento muito bonita.</p>
+                <p class="muted">Macio por dentro e brilhante por fora.</p>
                 <div class="community-post-footer">
                   <div class="author-chip">
                     <span class="avatar-circle">JR</span>
@@ -285,12 +326,12 @@
                 </div>
               </article>
 
-              <article class="community-post" data-community-post data-level="avancado">
-                <div class="community-thumb macaron"></div>
+              <article class="community-post" data-community-post data-level="avancado" data-recipe-id="entremet-morango-pistache" data-thumb="pistache-entremet">
+                <div class="community-thumb pistache-entremet"></div>
                 <div class="community-post-head">
                   <div>
                     <span class="community-level advanced">Avançado</span>
-                    <h3>Entremet de morango e pistache</h3>
+                    <h3><a href="./receita.html?recipe=entremet-morango-pistache">Entremet de morango e pistache</a></h3>
                   </div>
                   <div class="community-meta">
                     <span>⏱ 3h</span>
@@ -298,7 +339,7 @@
                     <span>💬 36</span>
                   </div>
                 </div>
-                <p class="muted">Camadas refinadas, textura bem equilibrada e apresentação pronta para vitrine profissional.</p>
+                <p class="muted">Camadas refinadas e visual de vitrine.</p>
                 <div class="community-post-footer">
                   <div class="author-chip">
                     <span class="avatar-circle">SA</span>
@@ -325,17 +366,17 @@
             <article class="community-panel">
               <span class="community-level basic">Básico</span>
               <h3>Primeiras receitas</h3>
-              <p class="muted">Receitas simples, etapas curtas e foco em ganhar confiança na cozinha.</p>
+              <p class="muted">Etapas curtas para ganhar confiança.</p>
             </article>
             <article class="community-panel">
               <span class="community-level intermediate">Intermediário</span>
               <h3>Técnica e consistência</h3>
-              <p class="muted">Você já domina massas, recheios e acabamento com mais precisão.</p>
+              <p class="muted">Mais precisão em massas e recheios.</p>
             </article>
             <article class="community-panel">
               <span class="community-level advanced">Avançado</span>
               <h3>Resultado de vitrine</h3>
-              <p class="muted">Preparos complexos, montagem refinada e apresentação premium.</p>
+              <p class="muted">Montagem refinada e visual premium.</p>
             </article>
           </div>
         </section>

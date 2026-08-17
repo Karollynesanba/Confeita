@@ -72,7 +72,7 @@ http://localhost:3000/confeita-identidade.html
 
 - Hero da receita com imagem de destaque
 - Temporizador de preparo
-- Tabs para ingredientes, modo de preparo e comentários
+- Abas para ingredientes, modo de preparo e comentários
 - Login obrigatório para comentar
 
 ### Comunidade

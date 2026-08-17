@@ -7,27 +7,72 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="icon" href="./assets/favicon.svg" />
+    <link rel="icon" href="./assets/logo-exact.png" />
     <link rel="stylesheet" href="./theme.css" />
     <script defer src="./app.js"></script>
   </head>
   <body data-page="login">
     <div class="app-shell login-shell">
-      <header class="topbar">
-        <div class="topbar-inner">
+      <header class="topbar topbar-home" data-home-header>
+        <div class="topbar-inner topbar-inner-home">
           <a class="brand" href="./confeita-identidade.html">
-            <img src="./assets/favicon.svg" alt="" width="38" height="38" />
-            <span class="brand-text"><strong>confeita</strong></span>
+            <img class="brand-mark" src="./assets/logo-exact.png" alt="Confeita" />
           </a>
-          <nav class="nav-links" aria-label="Principal">
-            <a data-nav href="./confeita-identidade.html">Receitas</a>
-            <a data-nav href="./confeita-identidade.html">Desafios</a>
+          <nav class="nav-links nav-links-main" aria-label="Principal">
+            <a data-nav href="./receita.html">Receitas</a>
             <a data-nav href="./comunidade.html">Comunidade</a>
-            <a data-nav href="./chat.html">Ajuda</a>
           </nav>
-          <div style="display:flex; gap:10px; align-items:center;">
-            <a class="btn btn-secondary" href="./confeita-identidade.html">Voltar</a>
-            <a class="nav-cta" href="./receita.html">Começar grátis</a>
+          <div class="category-picker nav-categories" data-category-picker>
+            <button class="filter-chip category-trigger" type="button" data-categories-toggle aria-expanded="false" aria-controls="login-category-menu">
+              <span>Categorias</span>
+              <span class="category-caret" aria-hidden="true">▾</span>
+            </button>
+            <div class="category-menu" id="login-category-menu" data-categories-menu hidden>
+              <button class="category-option active" type="button" data-recipe-filter="all">Todas</button>
+              <button class="category-option" type="button" data-recipe-filter="bolos">Bolos</button>
+              <button class="category-option" type="button" data-recipe-filter="cupcakes">Cupcakes</button>
+              <button class="category-option" type="button" data-recipe-filter="tortas">Tortas</button>
+              <button class="category-option" type="button" data-recipe-filter="paes">Pães</button>
+              <button class="category-option" type="button" data-recipe-filter="mousses">Mousses</button>
+              <button class="category-option" type="button" data-recipe-filter="macarons">Macarons</button>
+              <button class="category-option" type="button" data-recipe-filter="sobremesas">Sobremesas</button>
+            </div>
+          </div>
+          <div class="header-actions">
+            <a class="btn btn-secondary header-login" href="./login.html">Entrar</a>
+            <a class="nav-cta header-cta" href="./receita.html">Começar grátis</a>
+            <button class="header-menu-toggle" type="button" data-header-menu-toggle aria-expanded="false" aria-controls="login-header-drawer" aria-label="Abrir menu">
+              <span class="sr-only">Abrir menu</span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+        <div class="header-drawer" id="login-header-drawer" data-header-drawer hidden>
+          <nav class="header-drawer-links" aria-label="Principal">
+            <a data-nav href="./receita.html">Receitas</a>
+            <a data-nav href="./comunidade.html">Comunidade</a>
+          </nav>
+          <div class="header-drawer-categories" data-category-picker>
+            <button class="filter-chip category-trigger" type="button" data-categories-toggle aria-expanded="false" aria-controls="login-category-menu-drawer">
+              <span>Categorias</span>
+              <span class="category-caret" aria-hidden="true">▾</span>
+            </button>
+            <div class="category-menu category-menu-drawer" id="login-category-menu-drawer" data-categories-menu hidden>
+              <button class="category-option active" type="button" data-recipe-filter="all">Todas</button>
+              <button class="category-option" type="button" data-recipe-filter="bolos">Bolos</button>
+              <button class="category-option" type="button" data-recipe-filter="cupcakes">Cupcakes</button>
+              <button class="category-option" type="button" data-recipe-filter="tortas">Tortas</button>
+              <button class="category-option" type="button" data-recipe-filter="paes">Pães</button>
+              <button class="category-option" type="button" data-recipe-filter="mousses">Mousses</button>
+              <button class="category-option" type="button" data-recipe-filter="macarons">Macarons</button>
+              <button class="category-option" type="button" data-recipe-filter="sobremesas">Sobremesas</button>
+            </div>
+          </div>
+          <div class="header-drawer-actions">
+            <a class="btn btn-secondary header-login" href="./login.html">Entrar</a>
+            <a class="nav-cta header-cta" href="./receita.html">Começar grátis</a>
           </div>
         </div>
       </header>
@@ -37,9 +82,6 @@
           <div class="login-copy">
             <span class="home-kicker">🔐 Acesso à conta Confeita</span>
             <h1 class="home-title">Entre para salvar receitas, comentar e acompanhar seu nível</h1>
-            <p class="lead">
-              Uma conta libera comentários, favoritos, progresso da comunidade e a experiência completa da Confeita.
-            </p>
 
             <div class="login-benefits">
               <div class="login-benefit">

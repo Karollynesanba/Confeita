@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -7,29 +7,72 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="icon" href="./assets/favicon.svg" />
+    <link rel="icon" href="./assets/logo-exact.png" />
     <link rel="stylesheet" href="./theme.css" />
     <script defer src="./app.js"></script>
   </head>
   <body data-page="home">
     <div class="home-shell">
-      <header class="topbar">
-        <div class="topbar-inner">
+      <header class="topbar topbar-home" data-home-header>
+        <div class="topbar-inner topbar-inner-home">
           <a class="brand" href="./confeita-identidade.html">
-            <img src="./assets/favicon.svg" alt="" width="42" height="42" />
-            <span class="brand-text">
-              <strong>confeita</strong>
-            </span>
+            <img class="brand-mark" src="./assets/logo-exact.png" alt="Confeita" />
           </a>
-          <nav class="nav-links" aria-label="Principal">
+          <nav class="nav-links nav-links-main" aria-label="Principal">
             <a data-nav href="./receita.html">Receitas</a>
-            <a data-nav href="./receita.html">Desafios</a>
             <a data-nav href="./comunidade.html">Comunidade</a>
-            <a data-nav href="./chat.html">Ajuda</a>
           </nav>
-          <div style="display:flex; gap:12px; align-items:center;">
-            <a class="btn btn-secondary" href="./login.html">Entrar</a>
-            <a class="nav-cta" href="./receita.html">Começar grátis</a>
+          <div class="category-picker nav-categories" data-category-picker>
+            <button class="filter-chip category-trigger" type="button" data-categories-toggle aria-expanded="false" aria-controls="home-category-menu">
+              <span>Categorias</span>
+              <span class="category-caret" aria-hidden="true">▾</span>
+            </button>
+            <div class="category-menu" id="home-category-menu" data-categories-menu hidden>
+              <button class="category-option active" type="button" data-recipe-filter="all">Todas</button>
+              <button class="category-option" type="button" data-recipe-filter="bolos">Bolos</button>
+              <button class="category-option" type="button" data-recipe-filter="cupcakes">Cupcakes</button>
+              <button class="category-option" type="button" data-recipe-filter="tortas">Tortas</button>
+              <button class="category-option" type="button" data-recipe-filter="paes">Pães</button>
+              <button class="category-option" type="button" data-recipe-filter="mousses">Mousses</button>
+              <button class="category-option" type="button" data-recipe-filter="macarons">Macarons</button>
+              <button class="category-option" type="button" data-recipe-filter="sobremesas">Sobremesas</button>
+            </div>
+          </div>
+          <div class="header-actions">
+            <a class="btn btn-secondary header-login" href="./login.html">Entrar</a>
+            <a class="nav-cta header-cta" href="./receita.html">Começar grátis</a>
+            <button class="header-menu-toggle" type="button" data-header-menu-toggle aria-expanded="false" aria-controls="home-header-drawer" aria-label="Abrir menu">
+              <span class="sr-only">Abrir menu</span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+        <div class="header-drawer" id="home-header-drawer" data-header-drawer hidden>
+          <nav class="header-drawer-links" aria-label="Principal">
+            <a data-nav href="./receita.html">Receitas</a>
+            <a data-nav href="./comunidade.html">Comunidade</a>
+          </nav>
+          <div class="header-drawer-categories" data-category-picker>
+            <button class="filter-chip category-trigger" type="button" data-categories-toggle aria-expanded="false" aria-controls="home-category-menu-drawer">
+              <span>Categorias</span>
+              <span class="category-caret" aria-hidden="true">▾</span>
+            </button>
+            <div class="category-menu category-menu-drawer" id="home-category-menu-drawer" data-categories-menu hidden>
+              <button class="category-option active" type="button" data-recipe-filter="all">Todas</button>
+              <button class="category-option" type="button" data-recipe-filter="bolos">Bolos</button>
+              <button class="category-option" type="button" data-recipe-filter="cupcakes">Cupcakes</button>
+              <button class="category-option" type="button" data-recipe-filter="tortas">Tortas</button>
+              <button class="category-option" type="button" data-recipe-filter="paes">Pães</button>
+              <button class="category-option" type="button" data-recipe-filter="mousses">Mousses</button>
+              <button class="category-option" type="button" data-recipe-filter="macarons">Macarons</button>
+              <button class="category-option" type="button" data-recipe-filter="sobremesas">Sobremesas</button>
+            </div>
+          </div>
+          <div class="header-drawer-actions">
+            <a class="btn btn-secondary header-login" href="./login.html">Entrar</a>
+            <a class="nav-cta header-cta" href="./receita.html">Começar grátis</a>
           </div>
         </div>
       </header>
@@ -40,12 +83,9 @@
           <div class="home-copy">
             <span class="home-kicker">Confeita para receitas, descobertas e comunidade</span>
             <h1 class="home-title">Receitas de confeitaria para fazer, aproveitar e compartilhar</h1>
-            <p class="lead">
-              Descubra receitas, encontre ideias para o que ja tem em casa e ache confeitarias proximas sem complicacao.
-            </p>
             <div class="hero-search">
               <span style="color:#c79b7d">⌕</span>
-              <input data-recipe-search type="search" placeholder="Buscar receitas, ingredientes ou tecnicas..." />
+              <input data-recipe-search type="search" placeholder="Buscar receitas, ingredientes ou técnicas..." />
             </div>
             <div class="hero-buttons">
               <a class="btn btn-primary" href="#receitas">Ver receitas</a>
@@ -57,11 +97,11 @@
             <div class="hero-photo photo-real"></div>
             <div class="hero-float left">
               <small>Receita em alta</small>
-              <strong>Macaron Frances</strong>
+              <strong>Macaron Francês</strong>
             </div>
             <div class="hero-float right">
-              <small>Confeitarias perto de voce</small>
-              <strong>Descubra opcoes</strong>
+              <small>Confeitarias perto de você</small>
+              <strong>Descubra opções</strong>
             </div>
             <div class="hero-orb"></div>
           </div>
@@ -76,16 +116,6 @@
             </div>
             <a href="./receita.html" class="muted">Ver todas →</a>
           </div>
-          <div class="recipe-filters" aria-label="Filtrar receitas por categoria">
-            <button class="filter-chip active" type="button" data-recipe-filter="all">Tudo</button>
-            <button class="filter-chip" type="button" data-recipe-filter="bolos">Bolos</button>
-            <button class="filter-chip" type="button" data-recipe-filter="cupcakes">Cupcakes</button>
-            <button class="filter-chip" type="button" data-recipe-filter="tortas">Tortas</button>
-            <button class="filter-chip" type="button" data-recipe-filter="paes">Pães</button>
-            <button class="filter-chip" type="button" data-recipe-filter="mousses">Mousses</button>
-            <button class="filter-chip" type="button" data-recipe-filter="macarons">Macarons</button>
-            <button class="filter-chip" type="button" data-recipe-filter="sobremesas">Sobremesas</button>
-          </div>
           <div class="card-scroller" data-recipe-list></div>
           <div class="recipe-scrollbar"></div>
         </section>
@@ -93,7 +123,7 @@
         <section id="aproveitar" class="section pantry-section">
           <div class="section-title-row">
             <div>
-              <h2>Aproveite o que voce tem</h2>
+              <h2>Aproveite o que você tem</h2>
               <p class="muted">Digite ingredientes da sua cozinha e receba ideias para usar tudo com mais sabor.</p>
             </div>
             <a href="./receita.html" class="muted">Ver mais ideias →</a>
@@ -101,7 +131,7 @@
           <div class="pantry-panel">
             <div class="pantry-input-card">
               <label class="field">
-                <span>Ingredientes disponiveis</span>
+                <span>Ingredientes disponíveis</span>
                 <input data-pantry-input type="text" placeholder="Ex.: ovos, banana, chocolate, leite..." />
               </label>
               <div class="quick-pills">
@@ -112,7 +142,7 @@
                 <button class="pill" type="button" data-pantry-pick="farinha">Farinha</button>
                 <button class="pill" type="button" data-pantry-pick="manteiga">Manteiga</button>
               </div>
-              <p class="muted pantry-help">Digite um ou mais ingredientes separados por virgula.</p>
+              <p class="muted pantry-help">Digite um ou mais ingredientes separados por vírgula.</p>
             </div>
             <div class="pantry-results" data-pantry-results></div>
           </div>
@@ -121,10 +151,10 @@
         <section class="section soft">
           <div class="section-title-row">
             <div>
-              <h2>Confeitarias proximas</h2>
-              <p class="muted">Lojas selecionadas com distancia, especialidades e acesso ao cardapio.</p>
+              <h2>Confeitarias próximas</h2>
+              <p class="muted">Lojas selecionadas com distância, especialidades e acesso ao cardápio.</p>
             </div>
-            <a href="./receita.html" class="muted">Ver cardapios →</a>
+            <a href="./receita.html" class="muted">Ver cardápios →</a>
           </div>
           <div class="bakery-grid">
             <article class="bakery-card">
@@ -136,7 +166,7 @@
                 </div>
                 <p class="muted">Especialidades: bolos artesanais, tortas e encomendas sob medida.</p>
                 <div class="bakery-meta"><span>★ 4.9</span><span>Aberto hoje</span></div>
-                <a class="btn btn-secondary" href="./receita.html">Ver cardapio</a>
+                <a class="btn btn-secondary" href="./receita.html">Ver cardápio</a>
               </div>
             </article>
             <article class="bakery-card">
@@ -147,8 +177,8 @@
                   <span class="bakery-distance">2,4 km</span>
                 </div>
                 <p class="muted">Especialidades: chocolates, cookies recheados e sobremesas para viagem.</p>
-                <div class="bakery-meta"><span>★ 4.8</span><span>Entrega rapida</span></div>
-                <a class="btn btn-secondary" href="./receita.html">Ver cardapio</a>
+                <div class="bakery-meta"><span>★ 4.8</span><span>Entrega rápida</span></div>
+                <a class="btn btn-secondary" href="./receita.html">Ver cardápio</a>
               </div>
             </article>
             <article class="bakery-card">
@@ -158,30 +188,11 @@
                   <h3>Forno & Creme</h3>
                   <span class="bakery-distance">3,1 km</span>
                 </div>
-                <p class="muted">Especialidades: croissants, pães doces e doces para o cafe da manha.</p>
+                <p class="muted">Especialidades: croissants, pães doces e doces para o café da manhã.</p>
                 <div class="bakery-meta"><span>★ 4.7</span><span>Encomendas abertas</span></div>
-                <a class="btn btn-secondary" href="./receita.html">Ver cardapio</a>
+                <a class="btn btn-secondary" href="./receita.html">Ver cardápio</a>
               </div>
             </article>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-title-row">
-            <div>
-              <h2>Categorias mais buscadas</h2>
-              <p class="muted">Exploracao rapida com leitura suave.</p>
-            </div>
-          </div>
-          <div class="category-row">
-            <div class="category-pill">🎂<br/>Bolos</div>
-            <div class="category-pill">🧁<br/>Cupcakes</div>
-            <div class="category-pill">🍰<br/>Tortas</div>
-            <div class="category-pill">🍫<br/>Brigadeiros</div>
-            <div class="category-pill">🥐<br/>Pães</div>
-            <div class="category-pill">🍮<br/>Mousses</div>
-            <div class="category-pill">🍇<br/>Macarons</div>
-            <div class="category-pill">🍰<br/>Sobremesas</div>
           </div>
         </section>
 
@@ -191,10 +202,10 @@
             <div class="challenge-grid" style="position:relative;">
               <div>
                 <span class="home-kicker" style="background:#f4c760;color:#5f3a19;">Desafio da semana</span>
-                <h2 style="font-family:'Baloo 2';font-size:clamp(2rem,4vw,3rem);margin:16px 0 12px;">Macaron Frances Colorido</h2>
+                <h2 style="font-family:'Baloo 2';font-size:clamp(2rem,4vw,3rem);margin:16px 0 12px;">Macaron Francês Colorido</h2>
                 <p class="lead" style="color:rgba(255,255,255,0.82);max-width:44ch;margin-top:0;">
                   Mostre suas habilidades e concorra a um kit completo de confeitaria profissional.
-                  Publique sua foto ate domingo.
+                  Publique sua foto até domingo.
                 </p>
                 <div class="challenge-count">
                   <div class="time-box"><strong data-days>03</strong><span>Dias</span></div>
@@ -212,88 +223,11 @@
           </div>
         </section>
 
-        <section class="section">
-          <div class="community-grid">
-            <div class="mosaic">
-              <div></div>
-              <div class="dark"></div>
-              <div class="dark"></div>
-              <div></div>
-            </div>
-            <div>
-              <span class="section-chip">Comunidade</span>
-              <h2 style="font-family:'Baloo 2';font-size:clamp(2rem,4vw,3rem);margin:16px 0 12px;">Uma comunidade apaixonada por confeitaria</h2>
-              <p class="lead" style="margin-top:0;max-width:42ch;">
-                Compartilhe suas criacoes, receba feedback, participe de desafios e inspire-se com
-                receitas criadas pela comunidade.
-              </p>
-              <div class="stats-row">
-                <div class="stat-card"><strong>47k+</strong><span class="muted">Membros</span></div>
-                <div class="stat-card"><strong>120k+</strong><span class="muted">Receitas</span></div>
-                <div class="stat-card"><strong>98%</strong><span class="muted">Satisfacao</span></div>
-              </div>
-              <div class="hero-buttons" style="margin-top:20px;">
-                <a class="btn btn-primary" href="./comunidade.html">Entrar na comunidade</a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section soft">
-          <div class="help-section">
-            <div>
-              <span class="section-chip subtle">Ajuda na cozinha</span>
-              <h2 style="font-family:'Baloo 2';font-size:clamp(2rem,4vw,3.1rem);margin:18px 0 12px;">Conte com sugestões praticas quando precisar</h2>
-              <p class="lead" style="margin-top:0;max-width:46ch;">
-                Se quiser, a Confeita ajuda com substituicoes, tecnicas e ajustes de receita sem ocupar o centro da experiencia.
-              </p>
-              <ul class="muted" style="line-height:2; padding-left:18px; margin:18px 0 0;">
-                <li>Ajustes simples para o que voce tem na cozinha</li>
-                <li>Dicas de tecnicas e ponto sem complicacao</li>
-              </ul>
-            </div>
-            <div class="chat-card help-card">
-              <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-                <img src="./assets/favicon.svg" alt="" width="38" height="38" />
-                <div>
-                  <strong>Ajuda rapida</strong><br />
-                  <span class="muted">Disponivel quando voce precisar</span>
-                </div>
-              </div>
-              <div class="bubble">Preciso substituir leite condensado, o que posso usar?</div>
-              <div class="bubble me">Tenho creme de leite e leite em po.</div>
-              <div class="bubble">Perfeito. Da para ajustar a textura e manter o ponto da receita sem perder sabor.</div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section soft">
-          <div class="section-title-row" style="justify-content:center;text-align:center;display:block;">
-            <h2>Perguntas frequentes</h2>
-            <p class="muted">Respostas rapidas para quem esta começando ou quer explorar melhor a Confeita.</p>
-          </div>
-          <div style="max-width:720px;margin:0 auto;">
-            <div class="faq-item open" data-faq>
-              <button class="faq-q" type="button">A Confeita é adequada para iniciantes? <span class="chev">⌄</span></button>
-              <div class="faq-a">Sim, as receitas e as instruções sao pensadas para guiar do nivel iniciante ao avancado.</div>
-            </div>
-            <div class="faq-item" data-faq>
-              <button class="faq-q" type="button">Como funciona a ajuda nas receitas? <span class="chev">⌄</span></button>
-              <div class="faq-a">Voce descreve o que tem em casa ou a sua duvida e recebe orientacoes adaptadas ao contexto da receita.</div>
-            </div>
-            <div class="faq-item" data-faq>
-              <button class="faq-q" type="button">Como funcionam os desafios semanais? <span class="chev">⌄</span></button>
-              <div class="faq-a">Toda semana surge uma receita com prazo, participacao e recompensa para engajar a comunidade.</div>
-            </div>
-          </div>
-        </section>
-
         <section class="cta-block">
           <div style="font-size:2.6rem;">🎂</div>
           <h2 style="font-family:'Baloo 2';font-size:clamp(2rem,4vw,3rem);margin:10px 0 8px;">Pronta para começar?</h2>
-          <p class="muted" style="margin:0 0 18px;">Junte-se a 47.000 confeiteiras e comece a aprender hoje. Gratis para sempre.</p>
           <div class="hero-buttons" style="justify-content:center;">
-            <a class="btn btn-primary" href="./receita.html">Criar conta gratuita ✨</a>
+            <a class="btn btn-primary" href="./receita.html">Criar conta gratuita</a>
             <a class="btn btn-secondary" href="./login.html">Entrar</a>
           </div>
         </section>
@@ -303,15 +237,12 @@
             <div class="footer-columns">
               <div>
                 <div class="brand" style="margin-bottom:12px;">
-                  <img src="./assets/favicon.svg" alt="" width="34" height="34" />
-                  <span class="brand-text"><strong style="color:#fff;">confeita</strong></span>
+                  <img class="brand-mark brand-mark-footer" src="./assets/logo-exact.png" alt="Confeita" />
                 </div>
-                <p style="max-width:26ch;">A melhor plataforma para aprender confeitaria em casa, do iniciante ao expert.</p>
               </div>
               <div>
                 <h4>Plataforma</h4>
                 <a href="./receita.html">Receitas</a>
-                <a href="./receita.html">Desafios</a>
                 <a href="./chat.html">Ajuda</a>
                 <a href="./comunidade.html">Comunidade</a>
               </div>

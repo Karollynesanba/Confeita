@@ -7,34 +7,80 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="icon" href="./assets/favicon.svg" />
+    <link rel="icon" href="./assets/logo-exact.png" />
     <link rel="stylesheet" href="./theme.css" />
     <script defer src="./app.js"></script>
   </head>
   <body data-page="chat">
-    <header class="topbar chat-topbar">
-      <div class="topbar-inner">
-        <div class="chat-header-left">
-          <button class="hero-fab" type="button" aria-label="Voltar" style="position:static;">‹</button>
-          <div class="chat-header-avatar">CI</div>
-          <div>
-            <strong>Chef IA</strong>
-            <small>Especialista em confeitaria</small>
+      <header class="topbar topbar-home" data-home-header>
+        <div class="topbar-inner topbar-inner-home">
+          <a class="brand" href="./confeita-identidade.html">
+            <img class="brand-mark" src="./assets/logo-exact.png" alt="Confeita" />
+          </a>
+          <nav class="nav-links nav-links-main" aria-label="Principal">
+            <a data-nav href="./receita.html">Receitas</a>
+            <a data-nav href="./comunidade.html">Comunidade</a>
+          </nav>
+          <div class="category-picker nav-categories" data-category-picker>
+            <button class="filter-chip category-trigger" type="button" data-categories-toggle aria-expanded="false" aria-controls="chat-category-menu">
+              <span>Categorias</span>
+              <span class="category-caret" aria-hidden="true">▾</span>
+            </button>
+            <div class="category-menu" id="chat-category-menu" data-categories-menu hidden>
+              <button class="category-option active" type="button" data-recipe-filter="all">Todas</button>
+              <button class="category-option" type="button" data-recipe-filter="bolos">Bolos</button>
+              <button class="category-option" type="button" data-recipe-filter="cupcakes">Cupcakes</button>
+              <button class="category-option" type="button" data-recipe-filter="tortas">Tortas</button>
+              <button class="category-option" type="button" data-recipe-filter="paes">Pães</button>
+              <button class="category-option" type="button" data-recipe-filter="mousses">Mousses</button>
+              <button class="category-option" type="button" data-recipe-filter="macarons">Macarons</button>
+              <button class="category-option" type="button" data-recipe-filter="sobremesas">Sobremesas</button>
+            </div>
+          </div>
+          <div class="header-actions">
+            <a class="btn btn-secondary header-login" href="./login.html">Entrar</a>
+            <a class="nav-cta header-cta" href="./receita.html">Começar grátis</a>
+            <button class="header-menu-toggle" type="button" data-header-menu-toggle aria-expanded="false" aria-controls="chat-header-drawer" aria-label="Abrir menu">
+              <span class="sr-only">Abrir menu</span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
           </div>
         </div>
-      <a class="hero-fab" href="./comunidade.html" aria-label="Comunidade" style="position:static; display:grid; place-items:center;">⌁</a>
-      </div>
-    </header>
+        <div class="header-drawer" id="chat-header-drawer" data-header-drawer hidden>
+          <nav class="header-drawer-links" aria-label="Principal">
+            <a data-nav href="./receita.html">Receitas</a>
+            <a data-nav href="./comunidade.html">Comunidade</a>
+          </nav>
+          <div class="header-drawer-categories" data-category-picker>
+            <button class="filter-chip category-trigger" type="button" data-categories-toggle aria-expanded="false" aria-controls="chat-category-menu-drawer">
+              <span>Categorias</span>
+              <span class="category-caret" aria-hidden="true">▾</span>
+            </button>
+            <div class="category-menu category-menu-drawer" id="chat-category-menu-drawer" data-categories-menu hidden>
+              <button class="category-option active" type="button" data-recipe-filter="all">Todas</button>
+              <button class="category-option" type="button" data-recipe-filter="bolos">Bolos</button>
+              <button class="category-option" type="button" data-recipe-filter="cupcakes">Cupcakes</button>
+              <button class="category-option" type="button" data-recipe-filter="tortas">Tortas</button>
+              <button class="category-option" type="button" data-recipe-filter="paes">Pães</button>
+              <button class="category-option" type="button" data-recipe-filter="mousses">Mousses</button>
+              <button class="category-option" type="button" data-recipe-filter="macarons">Macarons</button>
+              <button class="category-option" type="button" data-recipe-filter="sobremesas">Sobremesas</button>
+            </div>
+          </div>
+          <div class="header-drawer-actions">
+            <a class="btn btn-secondary header-login" href="./login.html">Entrar</a>
+            <a class="nav-cta header-cta" href="./receita.html">Começar grátis</a>
+          </div>
+        </div>
+      </header>
 
     <main class="chat-page-main">
       <section class="chat-board" data-chat-stream>
         <div class="chat-line">
           <div class="chat-header-avatar">CI</div>
-          <div class="chat-bubble">Olá! Sou o Chef IA da Confeita! 🎂 Estou aqui para te ajudar com qualquer dúvida de confeitaria. Sobre o que posso te ajudar hoje?</div>
-        </div>
-        <div class="chat-line">
-          <div class="chat-header-avatar">CI</div>
-          <div class="chat-bubble">Posso ajudar com técnicas, substituições, dicas de decoração e muito mais. É só perguntar!</div>
+          <div class="chat-bubble">Olá! Sou o Chef IA da Confeita! 👋 Sobre o que posso te ajudar hoje?</div>
         </div>
 
         <div class="chat-pills">

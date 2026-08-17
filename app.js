@@ -8,15 +8,142 @@ const setActiveNav = () => {
   });
 };
 
+const setupHomeHeader = () => {
+  const header = document.querySelector("[data-home-header]");
+  if (!header) return;
+
+  const toggle = header.querySelector("[data-header-menu-toggle]");
+  const drawer = header.querySelector("[data-header-drawer]");
+  if (!toggle || !drawer) return;
+
+  const closeDrawer = () => {
+    drawer.hidden = true;
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.classList.remove("is-open");
+  };
+
+  const openDrawer = () => {
+    drawer.hidden = false;
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.classList.add("is-open");
+  };
+
+  const syncDrawer = () => {
+    if (window.matchMedia("(min-width: 981px)").matches) {
+      closeDrawer();
+    }
+  };
+
+  toggle.addEventListener("click", () => {
+    if (drawer.hidden) openDrawer();
+    else closeDrawer();
+  });
+
+  drawer.addEventListener("click", (event) => {
+    const target = event.target;
+    if (target instanceof HTMLElement && (target.closest("a") || target.matches("button[data-recipe-filter]"))) {
+      if (window.matchMedia("(max-width: 980px)").matches) {
+        closeDrawer();
+      }
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeDrawer();
+  });
+
+  window.addEventListener("resize", syncDrawer);
+  syncDrawer();
+};
+
+const setupCategoryPickers = () => {
+  const pickers = [...document.querySelectorAll("[data-category-picker]")];
+  if (!pickers.length) return;
+
+  const closePicker = (picker) => {
+    const toggle = picker.querySelector("[data-categories-toggle]");
+    const menu = picker.querySelector("[data-categories-menu]");
+    if (toggle) toggle.setAttribute("aria-expanded", "false");
+    if (menu) menu.hidden = true;
+    picker.classList.remove("is-open");
+  };
+
+  const openPicker = (picker) => {
+    pickers.forEach((otherPicker) => {
+      if (otherPicker !== picker) closePicker(otherPicker);
+    });
+    const toggle = picker.querySelector("[data-categories-toggle]");
+    const menu = picker.querySelector("[data-categories-menu]");
+    if (toggle) toggle.setAttribute("aria-expanded", "true");
+    if (menu) menu.hidden = false;
+    picker.classList.add("is-open");
+  };
+
+  const closeAll = () => {
+    pickers.forEach(closePicker);
+  };
+
+  const syncCategoryState = (activeFilter) => {
+    document.querySelectorAll("[data-recipe-filter]").forEach((button) => {
+      const isActive = button.dataset.recipeFilter === activeFilter;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+  };
+
+  pickers.forEach((picker) => {
+    const toggle = picker.querySelector("[data-categories-toggle]");
+    const menu = picker.querySelector("[data-categories-menu]");
+    if (!toggle || !menu) return;
+
+    toggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      if (menu.hidden) openPicker(picker);
+      else closePicker(picker);
+    });
+
+    menu.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLElement)) return;
+      const option = target.closest("[data-recipe-filter]");
+      if (!option) return;
+      if (window.__confeitaSetRecipeFilter) {
+        window.__confeitaSetRecipeFilter(option.dataset.recipeFilter || "all");
+      }
+      closeAll();
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+    if (!target.closest("[data-category-picker]")) {
+      closeAll();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeAll();
+  });
+
+  window.addEventListener("resize", () => {
+    closeAll();
+  });
+
+  syncCategoryState("all");
+  window.__confeitaSyncRecipeFilter = syncCategoryState;
+  window.__confeitaCloseRecipeCategories = closeAll;
+};
+
 const formatTime = (seconds) => {
   const s = Math.max(0, Math.floor(seconds));
   const h = Math.floor(s / 3600);
   const m = Math.floor((s % 3600) / 60);
   const r = s % 60;
-  return [h, m, r].map((part, index) => String(part).padStart(index === 0 && h ? 2 : 2, "0")).join(":");
+  return [h, m, r].map((part, index) => String(part).padStart(index === 0 && h ?2 : 2, "0")).join(":");
 };
 
-const API_BASE = location.protocol === "file:" ? "http://localhost:3000" : "";
+const API_BASE = location.protocol === "file:" ?"http://localhost:3000" : "";
 const AUTH_TOKEN_KEY = "confeita_auth_token";
 
 const RECIPE_LEVEL_LABELS = {
@@ -42,7 +169,7 @@ const RECIPES = [
     timer: "25:00",
     cover: {
       card: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(61,33,20,0.18)), url('./assets/bolo-chocolate-card.png') center center / cover no-repeat",
-      hero: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(61,33,20,0.18)), url('./assets/bolo-chocolate-card.png') center center / cover no-repeat",
+      hero: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(61,33,20,0.18)), url('./assets/brownie-chocolate-hero.png') center 54% / cover no-repeat",
     },
     ingredients: [
       {
@@ -75,6 +202,51 @@ const RECIPES = [
     storage: "Até 3 dias em recipiente bem fechado em temperatura ambiente.",
   },
   {
+    id: "bolo-caneca-chocolate",
+    title: "Bolo de Chocolate de Caneca",
+    category: "sobremesas",
+    categoryLabel: "Sobremesas",
+    categoryBadge: "☕ Bolo de caneca",
+    level: "basico",
+    time: "10 min",
+    yield: "1 porção generosa",
+    temperature: "800 W",
+    rating: "4.9",
+    reviews: 84,
+    summary: "Um bolo de caneca macio, com centro úmido e chocolate derretido para matar a vontade rapidinho.",
+    timer: "05:00",
+    cover: {
+      card: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(61,33,20,0.16)), url('./assets/bolo-caneca.png') center center / cover no-repeat",
+      hero: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(61,33,20,0.16)), url('./assets/bolo-caneca.png') center center / cover no-repeat",
+    },
+    ingredients: [
+      {
+        title: "Ingredientes",
+        items: [
+          "4 colheres de sopa de farinha de trigo",
+          "2 colheres de sopa de açúcar",
+          "2 colheres de sopa de cacau em pó",
+          "1/4 de colher de chá de fermento químico",
+          "3 colheres de sopa de leite",
+          "2 colheres de sopa de óleo",
+          "1 ovo",
+          "2 colheres de sopa de chocolate picado ou gotas",
+        ],
+      },
+    ],
+    steps: [
+      "Em uma caneca grande, misture farinha, açúcar, cacau e fermento.",
+      "Adicione o leite, o óleo e o ovo, mexendo até a massa ficar lisa.",
+      "Incorpore o chocolate picado ou as gotas por cima da massa.",
+      "Leve ao micro-ondas por 1 minuto e 10 segundos a 1 minuto e 30 segundos, conforme a potência.",
+      "Deixe descansar por 30 segundos antes de servir.",
+      "Se quiser, finalize com mais chocolate derretido ou uma bola de sorvete.",
+    ],
+    tip: "Não encha a caneca até a borda. A massa cresce e pode transbordar no micro-ondas.",
+    mistake: "Assar tempo demais e deixar o centro seco.",
+    storage: "Melhor consumir na hora. Se precisar, aqueça por poucos segundos antes de servir.",
+  },
+  {
     id: "bolo-cenoura-brigadeiro",
     title: "Bolo de Cenoura com Brigadeiro",
     category: "bolos",
@@ -89,8 +261,8 @@ const RECIPES = [
     summary: "Clássico, fofinho e com cobertura de brigadeiro brilhante para a vitrine ou para casa.",
     timer: "30:00",
     cover: {
-      card: "linear-gradient(135deg, rgba(255,216,168,0.95), rgba(248,192,126,0.96), rgba(255,246,232,0.88))",
-      hero: "linear-gradient(135deg, rgba(255,210,150,0.96), rgba(243,178,106,0.96), rgba(255,245,226,0.88))",
+      card: "linear-gradient(180deg, rgba(255,255,255,0.08), rgba(61,33,20,0.16)), url('./assets/bolo-cenoura-brigadeiro.png') center center / cover no-repeat",
+      hero: "linear-gradient(180deg, rgba(255,255,255,0.08), rgba(61,33,20,0.16)), url('./assets/bolo-cenoura-brigadeiro.png') center center / cover no-repeat",
     },
     ingredients: [
       {
@@ -193,8 +365,8 @@ const RECIPES = [
     summary: "Acidez equilibrada, creme suave e merengue leve para terminar com brilho.",
     timer: "30:00",
     cover: {
-      card: "linear-gradient(135deg, rgba(242,241,200,0.96), rgba(218,234,160,0.94), rgba(253,250,227,0.88))",
-      hero: "linear-gradient(135deg, rgba(242,241,200,0.96), rgba(218,234,160,0.94), rgba(253,250,227,0.88))",
+      card: "linear-gradient(180deg, rgba(255,255,255,0.08), rgba(61,33,20,0.16)), url('./assets/torta-limao-merengue-suico.png') center center / cover no-repeat",
+      hero: "linear-gradient(180deg, rgba(255,255,255,0.08), rgba(61,33,20,0.16)), url('./assets/torta-limao-merengue-suico.png') center center / cover no-repeat",
     },
     ingredients: [
       { title: "Base", items: ["200 g de biscoito maisena", "90 g de manteiga derretida"] },
@@ -217,6 +389,169 @@ const RECIPES = [
     tip: "Evite retirar a parte branca da casca do limão junto com as raspas.",
     mistake: "Deixar a tigela do merengue tocar diretamente a água do banho-maria.",
     storage: "Refrigerada por até 3 dias.",
+  },
+  {
+    id: "mini-tortas-limao-cremosas",
+    title: "Mini Tortas de Limão Cremosas",
+    category: "tortas",
+    categoryLabel: "Tortas",
+    categoryBadge: "🍋 Mini tortas",
+    level: "basico",
+    time: "40 min",
+    yield: "4 mini tortas",
+    temperature: "180 °C",
+    rating: "4.8",
+    reviews: 96,
+    summary: "Mini tortas com base crocante, creme de limão leve e acabamento delicado para servir geladinhas.",
+    timer: "20:00",
+    cover: {
+      card: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(61,33,20,0.12)), url('./assets/torta-mini-limao-cremosa.png') center center / cover no-repeat",
+      hero: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(61,33,20,0.12)), url('./assets/torta-mini-limao-cremosa.png') center center / cover no-repeat",
+    },
+    ingredients: [
+      {
+        title: "Base",
+        items: ["200 g de biscoito maisena", "90 g de manteiga derretida"],
+      },
+      {
+        title: "Creme",
+        items: ["395 g de leite condensado", "200 g de creme de leite", "100 ml de suco de limão", "Raspas de 2 limões"],
+      },
+      {
+        title: "Finalização",
+        items: ["4 rodelas de limão", "Zest de limão a gosto"],
+      },
+    ],
+    steps: [
+      "Triture os biscoitos e misture com a manteiga derretida.",
+      "Forre forminhas de muffin ou mini torta, pressionando bem a base.",
+      "Asse por 8 a 10 minutos a 180 °C e deixe esfriar.",
+      "Misture leite condensado e creme de leite.",
+      "Adicione o suco de limão aos poucos até engrossar levemente.",
+      "Acrescente as raspas e distribua o creme sobre as bases frias.",
+      "Finalize com rodelas de limão e leve à geladeira por pelo menos 1 hora.",
+    ],
+    tip: "Quanto mais gelada, mais firme e cremosa ela fica na hora de servir.",
+    mistake: "Colocar o creme nas bases ainda mornas.",
+    storage: "Até 3 dias refrigeradas em recipiente fechado.",
+  },
+  {
+    id: "bolo-laranja-calda-brilhante",
+    title: "Bolo de Laranja com Calda Brilhante",
+    category: "bolos",
+    categoryLabel: "Bolos",
+    categoryBadge: "🍊 Bolo cítrico",
+    level: "intermediario",
+    time: "55 min",
+    yield: "10 a 12 porções",
+    temperature: "180 °C",
+    rating: "4.9",
+    reviews: 117,
+    summary: "Massa úmida, aroma cítrico e uma calda brilhante para finalizar com destaque.",
+    timer: "25:00",
+    cover: {
+      card: "linear-gradient(180deg, rgba(255,255,255,0.06), rgba(61,33,20,0.14)), url('./assets/bolo-laranja-calda-brilhante.png') center center / cover no-repeat",
+      hero: "linear-gradient(180deg, rgba(255,255,255,0.06), rgba(61,33,20,0.14)), url('./assets/bolo-laranja-calda-brilhante.png') center center / cover no-repeat",
+    },
+    ingredients: [
+      {
+        title: "Ingredientes da massa",
+        items: [
+          "3 ovos",
+          "180 ml de óleo",
+          "250 ml de suco de laranja natural",
+          "250 g de açúcar",
+          "260 g de farinha de trigo",
+          "15 g de fermento químico",
+          "Raspas de 2 laranjas",
+        ],
+      },
+      {
+        title: "Ingredientes da calda",
+        items: [
+          "200 ml de suco de laranja",
+          "120 g de açúcar",
+          "1 colher de sopa de manteiga",
+        ],
+      },
+    ],
+    steps: [
+      "Preaqueça o forno a 180 °C e unte uma forma com furo central.",
+      "Bata ovos, óleo, suco de laranja e açúcar até misturar bem.",
+      "Acrescente a farinha aos poucos e mexa até incorporar.",
+      "Adicione as raspas e o fermento por último.",
+      "Despeje a massa na forma e asse por 35 a 40 minutos.",
+      "Para a calda, leve suco, açúcar e manteiga ao fogo até encorpar levemente.",
+      "Desenforme o bolo morno e regue com a calda brilhante.",
+    ],
+    tip: "Use laranjas frescas e bem suculentas para uma cor mais viva e sabor mais aromático.",
+    mistake: "Colocar a calda sobre o bolo ainda muito quente e deixá-lo encharcar.",
+    storage: "Até 3 dias em recipiente fechado em temperatura ambiente.",
+  },
+  {
+    id: "entremet-morango-pistache",
+    title: "Entremet de Morango e Pistache",
+    category: "sobremesas",
+    categoryLabel: "Sobremesas",
+    categoryBadge: "🍓 Entremet premium",
+    level: "avancado",
+    time: "5 a 6 horas + descanso",
+    yield: "10 porções",
+    temperature: "160 °C",
+    rating: "5.0",
+    reviews: 128,
+    summary: "Camadas elegantes com mousse de pistache, inserto de morango e acabamento brilhante para vitrine.",
+    timer: "45:00",
+    cover: {
+      card: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(61,33,20,0.14)), url('./assets/entremet-morango-pistache.png') center center / cover no-repeat",
+      hero: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(61,33,20,0.14)), url('./assets/entremet-morango-pistache.png') center center / cover no-repeat",
+    },
+    ingredients: [
+      {
+        title: "Base de pistache",
+        items: [
+          "2 ovos",
+          "70 g de açúcar",
+          "60 g de farinha de trigo",
+          "20 g de farinha de pistache",
+          "30 g de manteiga derretida",
+        ],
+      },
+      {
+        title: "Inserto de morango",
+        items: [
+          "250 g de morangos",
+          "60 g de açúcar",
+          "5 g de gelatina em pó sem sabor",
+          "25 g de água",
+          "10 ml de suco de limão",
+        ],
+      },
+      {
+        title: "Mousse de pistache",
+        items: [
+          "250 g de chocolate branco",
+          "120 g de pasta de pistache",
+          "150 g de creme de leite",
+          "300 g de creme de leite fresco bem gelado",
+        ],
+      },
+    ],
+    steps: [
+      "Hidrate a gelatina na água e cozinhe morangos, açúcar e limão por 8 minutos.",
+      "Acrescente a gelatina hidratada, coloque em forma menor e congele completamente.",
+      "Para a base, bata ovos e açúcar até ficarem claros e volumosos.",
+      "Peneire farinha e farinha de pistache, incorpore delicadamente e adicione a manteiga morna.",
+      "Espalhe em uma assadeira e asse por 10 a 15 minutos a 180 °C.",
+      "Depois de frio, corte um disco ligeiramente menor que o molde final.",
+      "Para a mousse, derreta o chocolate branco, emulsione com creme aquecido e misture a pasta de pistache.",
+      "Bata o creme fresco em picos suaves e incorpore à base de pistache.",
+      "Monte com mousse, inserto, mais mousse e o disco de bolo.",
+      "Congele completamente, desenforme e finalize com brilho ou cobertura espelhada.",
+    ],
+    tip: "Deixe o inserto congelar bem antes de montar para manter as camadas limpas e definidas.",
+    mistake: "Tentar desenformar antes que o entremet esteja completamente firme.",
+    storage: "Depois de descongelado, manter refrigerado e consumir em até 2 a 3 dias. Não recongelar.",
   },
   {
     id: "macaron-chocolate",
@@ -350,7 +685,7 @@ const renderIngredientSections = (recipe) =>
     .map(
       (section) => `
         <section class="recipe-ingredient-section">
-          ${section.title ? `<h3>${escapeHtml(section.title)}</h3>` : ""}
+          ${section.title ?`<h3>${escapeHtml(section.title)}</h3>` : ""}
           <div class="checklist recipe-checklist-group">
             ${section.items
               .map(
@@ -397,7 +732,7 @@ const updateIngredientProgress = () => {
   const countLabel = document.querySelector("[data-ingredient-count]");
   const progress = document.querySelector("[data-ingredient-progress]");
   if (countLabel) countLabel.textContent = `${count} de ${checks.length} selecionados`;
-  if (progress) progress.style.width = `${checks.length ? Math.max(12, (count / checks.length) * 100) : 12}%`;
+  if (progress) progress.style.width = `${checks.length ?Math.max(12, (count / checks.length) * 100) : 12}%`;
 };
 
 const getAuthToken = () => localStorage.getItem(AUTH_TOKEN_KEY);
@@ -421,7 +756,7 @@ const apiRequest = async (path, options = {}) => {
 
   const contentType = response.headers.get("content-type") || "";
   const payload = contentType.includes("application/json")
-    ? await response.json()
+    ?await response.json()
     : await response.text();
 
   if (!response.ok) {
@@ -439,11 +774,12 @@ const formatCommentDate = (value) =>
   }).format(new Date(value));
 
 setActiveNav();
+setupHomeHeader();
+setupCategoryPickers();
 
 if (page === "home") {
   const search = document.querySelector("[data-recipe-search]");
   const recipeList = document.querySelector("[data-recipe-list]");
-  const filters = [...document.querySelectorAll("[data-recipe-filter]")];
   const pantryInput = document.querySelector("[data-pantry-input]");
   const pantryResults = document.querySelector("[data-pantry-results]");
   const pantryPicks = [...document.querySelectorAll("[data-pantry-pick]")];
@@ -466,48 +802,59 @@ if (page === "home") {
     });
   };
 
+  window.__confeitaSetRecipeFilter = (nextFilter) => {
+    activeFilter = nextFilter || "all";
+    if (typeof window.__confeitaSyncRecipeFilter === "function") {
+      window.__confeitaSyncRecipeFilter(activeFilter);
+    }
+    applyRecipeFilters();
+    if (typeof window.__confeitaCloseRecipeCategories === "function") {
+      window.__confeitaCloseRecipeCategories();
+    }
+  };
+
   const pantryIdeas = [
     {
       title: "Bolo de banana com chocolate",
       ingredients: ["banana", "ovo", "chocolate", "farinha"],
       time: "45 min",
       level: "Fácil",
-      note: "Perfeito para aproveitar bananas maduras e pedaços de chocolate.",
+      note: "Ótimo para bananas maduras e chocolate.",
     },
     {
       title: "Cookies macios com gotas de chocolate",
       ingredients: ["manteiga", "ovo", "farinha", "chocolate"],
       time: "30 min",
       level: "Fácil",
-      note: "Usa itens simples e transforma sobras em um lanche bonito.",
+      note: "Itens simples, lanche bonito.",
     },
     {
       title: "Bolo de iogurte e limão",
       ingredients: ["iogurte", "ovo", "limão", "farinha"],
       time: "50 min",
       level: "Fácil",
-      note: "Leve, aromatico e ótimo para o café da tarde.",
+      note: "Leve, aromático e ótimo para a tarde.",
     },
     {
       title: "Pão de queijo macio",
       ingredients: ["queijo", "ovo", "leite", "polvilho"],
       time: "40 min",
       level: "Médio",
-      note: "Uma boa saida para ovos, queijo e leite que estao na geladeira.",
+      note: "Ótima saída para ovos, queijo e leite.",
     },
     {
       title: "Torta de maçã e canela",
-      ingredients: ["maca", "manteiga", "farinha", "canela"],
+      ingredients: ["maçã", "manteiga", "farinha", "canela"],
       time: "1h",
       level: "Médio",
-      note: "Aproveita frutas maduras e rende uma sobremesa acolhedora.",
+      note: "Aproveita frutas maduras.",
     },
     {
       title: "Creme de colher com coco",
       ingredients: ["leite", "coco", "amido", "acucar"],
       time: "25 min",
       level: "Fácil",
-      note: "Uma opção rapida para usar leite e coco sem complicacao.",
+      note: "Rápido para usar leite e coco.",
     },
   ];
 
@@ -530,7 +877,7 @@ if (page === "home") {
         const matches = terms.filter((term) =>
           idea.ingredients.some((ingredient) => normalize(ingredient).includes(term) || term.includes(normalize(ingredient)))
         ).length;
-        const bonus = terms.length === 0 ? 1 : matches;
+        const bonus = terms.length === 0 ?1 : matches;
         return { ...idea, score: bonus };
       })
       .sort((a, b) => b.score - a.score)
@@ -559,21 +906,13 @@ if (page === "home") {
     search.addEventListener("input", applyRecipeFilters);
   }
 
-  filters.forEach((button) => {
-    button.addEventListener("click", () => {
-      activeFilter = button.dataset.recipeFilter || "all";
-      filters.forEach((filter) => filter.classList.toggle("active", filter === button));
-      applyRecipeFilters();
-    });
-  });
-
   pantryInput?.addEventListener("input", renderPantryIdeas);
   pantryPicks.forEach((button) => {
     button.addEventListener("click", () => {
       const ingredient = button.dataset.pantryPick || "";
       if (!pantryInput || !ingredient) return;
       const current = pantryInput.value.trim();
-      pantryInput.value = current ? `${current}, ${ingredient}` : ingredient;
+      pantryInput.value = current ?`${current}, ${ingredient}` : ingredient;
       renderPantryIdeas();
       pantryInput.focus();
     });
@@ -621,7 +960,7 @@ if (page === "login") {
   const showLoggedIn = (name) => {
     if (authStatus) authStatus.textContent = `Logado como ${name}`;
     if (authHint) {
-      authHint.textContent = "Sua conta já está ativa. Você pode voltar para a home ou continuar navegando.";
+      authHint.textContent = "Conta ativa.";
     }
     if (continueButton) continueButton.hidden = false;
   };
@@ -631,8 +970,8 @@ if (page === "login") {
       const me = await apiRequest("/api/me");
       showLoggedIn(me.name || "sua conta");
     } catch {
-      if (authStatus) authStatus.textContent = "Faça login para comentar e salvar suas receitas favoritas.";
-      if (authHint) authHint.textContent = "Use seu e-mail e senha cadastrados para entrar.";
+      if (authStatus) authStatus.textContent = "Faça login.";
+      if (authHint) authHint.textContent = "Use seu e-mail e senha.";
       if (continueButton) continueButton.hidden = true;
     }
   };
@@ -700,7 +1039,6 @@ if (page === "recipe") {
   if (summaryEl) summaryEl.textContent = recipe.summary || "";
   if (ratingEl) ratingEl.innerHTML = `★ ${recipe.rating} <small>(${recipe.reviews} avaliações)</small>`;
   if (timeEl) timeEl.textContent = `⏱ ${recipe.time}`;
-  if (levelEl) levelEl.textContent = RECIPE_LEVEL_LABELS[recipe.level] || "🟢 Básico";
   if (yieldEl) yieldEl.textContent = `🍽 ${recipe.yield}`;
   if (tempEl) tempEl.textContent = `🔥 ${recipe.temperature}`;
   if (ingredientPanel) ingredientPanel.innerHTML = renderIngredientSections(recipe);
@@ -764,14 +1102,14 @@ if (page === "recipe") {
   const renderAuthState = () => {
     const loggedIn = Boolean(currentUser);
     if (authStatus) {
-      authStatus.textContent = loggedIn ? `Logado como ${currentUser.name}` : "Entre para comentar";
+      authStatus.textContent = loggedIn ?`Logado como ${currentUser.name}` : "Entre para comentar";
     }
     if (authForms) authForms.hidden = loggedIn;
     if (composer) composer.hidden = !loggedIn;
     if (commentHint) {
       commentHint.textContent = loggedIn
-        ? `Você está comentando como ${currentUser.name}.`
-        : "Você precisa criar uma conta para publicar um comentário.";
+        ? `Comentando como ${currentUser.name}.`
+        : "Crie uma conta para publicar.";
     }
     if (commentSubmit) commentSubmit.disabled = !loggedIn;
   };
@@ -876,11 +1214,11 @@ if (page === "recipe") {
   commentSubmit?.addEventListener("click", async () => {
     const text = commentText?.value.trim() || "";
     if (!text) {
-      if (commentHint) commentHint.textContent = "Escreva um comentário antes de publicar.";
+      if (commentHint) commentHint.textContent = "Digite algo antes.";
       return;
     }
     if (!currentUser) {
-      if (commentHint) commentHint.textContent = "Entre ou crie uma conta para comentar.";
+      if (commentHint) commentHint.textContent = "Entre ou crie conta.";
       return;
     }
     try {
@@ -894,7 +1232,7 @@ if (page === "recipe") {
       });
       if (commentText) commentText.value = "";
       await loadComments();
-      if (commentHint) commentHint.textContent = "Comentário publicado com sucesso.";
+      if (commentHint) commentHint.textContent = "Publicado.";
     } catch (error) {
       if (commentHint) commentHint.textContent = error.message;
     } finally {
@@ -913,7 +1251,7 @@ if (page === "chat") {
   const send = (text, user = true) => {
     if (!stream) return;
     const bubble = document.createElement("div");
-    bubble.className = `message${user ? " me" : ""}`;
+    bubble.className = `message${user ?" me" : ""}`;
     bubble.textContent = text;
     stream.appendChild(bubble);
     stream.scrollTop = stream.scrollHeight;
@@ -956,6 +1294,7 @@ if (page === "chat") {
 if (page === "community") {
   const feed = document.querySelector("[data-community-feed]");
   const filters = [...document.querySelectorAll("[data-community-filter]")];
+  const filterHint = document.querySelector("[data-community-filter-hint]");
   const form = document.querySelector("[data-community-form]");
   const titleInput = document.querySelector("[data-community-title]");
   const levelInput = document.querySelector("[data-community-level]");
@@ -989,6 +1328,7 @@ if (page === "community") {
   };
 
   let state = { xp: 180 };
+  let activeFilter = "all";
   try {
     const rawState = localStorage.getItem(stateKey);
     if (rawState) state = { ...state, ...JSON.parse(rawState) };
@@ -1015,7 +1355,7 @@ if (page === "community") {
     const tier = getTier(state.xp);
     const nextTier = tierList[tierList.indexOf(tier) + 1];
     const progress = nextTier && Number.isFinite(nextTier.min)
-      ? ((state.xp - tier.min) / Math.max(1, nextTier.min - tier.min)) * 100
+      ?((state.xp - tier.min) / Math.max(1, nextTier.min - tier.min)) * 100
       : 100;
 
     if (xpValue) xpValue.textContent = `${state.xp}`;
@@ -1035,17 +1375,38 @@ if (page === "community") {
     return "cake";
   };
 
+  const initialPosts = feed
+    ? [...feed.querySelectorAll("[data-community-post]")].map((post) => ({
+        title: post.querySelector("h3")?.textContent?.trim() || "",
+        level: post.dataset.level || "basico",
+        recipeId: post.dataset.recipeId || "",
+        thumb: post.dataset.thumb || post.querySelector(".community-thumb")?.classList?.[1] || "",
+        time: post.querySelector(".community-meta span")?.textContent.replace(/^⏱\s*/, "").trim() || "",
+        likes: post.querySelectorAll(".community-meta span")[1]?.textContent.replace(/^❤\s*/, "").trim() || "0",
+        comments: post.querySelectorAll(".community-meta span")[2]?.textContent.replace(/^💬\s*/, "").trim() || "0",
+        description: post.querySelector(":scope > p.muted")?.textContent?.trim() || "",
+        author: post.querySelector(".author-chip strong")?.textContent?.trim() || "",
+        subtitle: post.querySelector(".author-chip small")?.textContent?.trim() || "",
+        initials: post.querySelector(".avatar-circle")?.textContent?.trim() || "VC",
+        tags: post.querySelector(".chip")?.textContent?.trim() || "",
+      }))
+    : [];
+
   const createPost = (post) => {
     const article = document.createElement("article");
     article.className = "community-post";
     article.dataset.communityPost = "true";
     article.dataset.level = post.level;
+    if (post.recipeId) article.dataset.recipeId = post.recipeId;
+    const titleMarkup = post.recipeId
+      ? `<h3><a href="./receita.html?recipe=${encodeURIComponent(post.recipeId)}">${post.title}</a></h3>`
+      : `<h3>${post.title}</h3>`;
     article.innerHTML = `
-      <div class="community-thumb ${thumbClass(post.level)}"></div>
+      <div class="community-thumb ${post.thumb || thumbClass(post.level)}"></div>
       <div class="community-post-head">
         <div>
-          <span class="community-level ${levelClass(post.level)}">${levelMap[post.level] || "Básico"}</span>
-          <h3>${post.title}</h3>
+          <span class="community-level ${levelClass(post.level)}">${post.levelLabel || levelMap[post.level] || "Básico"}</span>
+          ${titleMarkup}
         </div>
         <div class="community-meta">
           <span>⏱ ${post.time}</span>
@@ -1062,17 +1423,61 @@ if (page === "community") {
             <small class="muted">${post.subtitle}</small>
           </div>
         </div>
-        <span class="chip ${post.level === "basico" ? "mint" : post.level === "intermediario" ? "gold" : "dark"}">${post.tags}</span>
+        <span class="chip ${post.level === "basico" ?"mint" : post.level === "intermediario" ?"gold" : "dark"}">${post.tags}</span>
       </div>
     `;
     return article;
   };
 
-  const applyFilter = (filter) => {
-    filters.forEach((button) => button.classList.toggle("active", button.dataset.communityFilter === filter));
-    document.querySelectorAll("[data-community-post]").forEach((post) => {
-      post.hidden = filter !== "all" && post.dataset.level !== filter;
+  const getAllPosts = () => [
+    ...storedPosts.slice().reverse().map((post) => ({
+      ...post,
+      levelLabel: levelMap[post.level] || "Básico",
+    })),
+    ...initialPosts.map((post) => ({
+      ...post,
+      levelLabel: levelMap[post.level] || "Básico",
+    })),
+  ];
+
+  const renderFeed = () => {
+    if (!feed) return;
+    const matchingPosts = getAllPosts().filter((post) => activeFilter === "all" || post.level === activeFilter);
+    feed.innerHTML = "";
+
+    if (!matchingPosts.length) {
+      const empty = document.createElement("article");
+      empty.className = "community-post community-empty";
+      empty.innerHTML = `
+        <div class="community-post-head">
+          <div>
+            <span class="community-level basic">Sem resultados</span>
+            <h3>Nenhuma publicação neste nível</h3>
+          </div>
+        </div>
+        <p class="muted">Tente outro filtro ou publique uma nova receita para aparecer aqui.</p>
+      `;
+      feed.append(empty);
+      if (filterHint) {
+        filterHint.textContent = `Mostrando 0 publicações para ${activeFilter === "all" ? "todos os níveis" : levelMap[activeFilter].toLowerCase()}.`;
+      }
+      return;
+    }
+
+    matchingPosts.forEach((post) => {
+      feed.append(createPost(post));
     });
+
+    if (filterHint) {
+      const label = activeFilter === "all" ? "todos os níveis" : levelMap[activeFilter].toLowerCase();
+      filterHint.textContent = `Mostrando ${matchingPosts.length} ${matchingPosts.length === 1 ? "publicação" : "publicações"} para ${label}.`;
+    }
+  };
+
+  const applyFilter = (filter) => {
+    activeFilter = filter || "all";
+    filters.forEach((button) => button.classList.toggle("active", button.dataset.communityFilter === activeFilter));
+    renderFeed();
   };
 
   const storedPosts = (() => {
@@ -1082,12 +1487,6 @@ if (page === "community") {
       return [];
     }
   })();
-
-  if (feed && storedPosts.length) {
-    storedPosts.slice().reverse().forEach((post) => {
-      feed.prepend(createPost(post));
-    });
-  }
 
   filters.forEach((button) => {
     button.addEventListener("click", () => applyFilter(button.dataset.communityFilter || "all"));
@@ -1115,7 +1514,6 @@ if (page === "community") {
       comments: 0,
     };
 
-    feed.prepend(createPost(post));
     storedPosts.push(post);
     try {
       localStorage.setItem(postsKey, JSON.stringify(storedPosts.slice(-24)));
@@ -1126,7 +1524,7 @@ if (page === "community") {
     state.xp += xpGain[level] || 18;
     persistState();
     renderState();
-    applyFilter(filters.find((button) => button.classList.contains("active"))?.dataset.communityFilter || "all");
+    applyFilter(activeFilter);
     form.reset();
     if (levelInput) levelInput.value = "basico";
     if (titleInput) titleInput.focus();
